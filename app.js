@@ -68,6 +68,10 @@ let loginWeb = require('./app/routes/webApplication/login');
 let admin = require('./app/routes/webApplication/admin');
 let strutturaWeb = require('./app/routes/webApplication/struttura');
 let utentiStruttura = require('./app/routes/webApplication/utentiStruttura');
+let categoria = require('./app/routes/mobileApplication/categoria');
+let fornitore = require('./app/routes/mobileApplication/fornitore');
+let prodotti = require('./app/routes/mobileApplication/prodotti');
+let invioEmail = require('./app/routes/mobileApplication/invioEmail');
 
 let swaggerUi = require('swagger-ui-express');
 let swaggerDocument = require('./swagger.json');
@@ -83,6 +87,11 @@ app.use('/loginWeb',loginWeb);
 app.use('/getAdmin',admin);
 app.use('/getStrutturaWeb',strutturaWeb);
 app.use('/utentiStruttura',utentiStruttura);
+app.use('/categoria',categoria);
+app.use('/fornitore',fornitore);
+app.use('/prodotti',prodotti);
+app.use('/invioEmail',invioEmail);
+
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api-mobile', swaggerUi.serve, swaggerUi.setup(swaggerMobile));
