@@ -58,16 +58,16 @@ app.use(checkAuth);
 
 require('./routes/routes.js')(app);
 
-let  loginApp = require('./app/routes/mobileApplication/login');
-let  salvaSaldo = require('./app/routes/mobileApplication/salvaSaldo');
-let  struttura = require('./app/routes/mobileApplication/struttura');
-let  getSaldo = require('./app/routes/mobileApplication/getSaldo');
+let loginApp = require('./app/routes/mobileApplication/login');
+let salvaSaldo = require('./app/routes/mobileApplication/salvaSaldo');
+let struttura = require('./app/routes/mobileApplication/struttura');
+let getSaldo = require('./app/routes/mobileApplication/getSaldo');
 let cliente = require('./app/routes/mobileApplication/cliente');
 let salvaCliente = require('./app/routes/mobileApplication/salvaCliente');
 let loginWeb = require('./app/routes/webApplication/login');
 let admin = require('./app/routes/webApplication/admin');
 let strutturaWeb = require('./app/routes/webApplication/struttura');
-
+let utentiStruttura = require('./app/routes/webApplication/utentiStruttura');
 
 let swaggerUi = require('swagger-ui-express');
 let swaggerDocument = require('./swagger.json');
@@ -82,8 +82,7 @@ app.use('/salvaCliente',salvaCliente);
 app.use('/loginWeb',loginWeb);
 app.use('/getAdmin',admin);
 app.use('/getStrutturaWeb',strutturaWeb);
-
-
+app.use('/utentiStruttura',utentiStruttura);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api-mobile', swaggerUi.serve, swaggerUi.setup(swaggerMobile));
