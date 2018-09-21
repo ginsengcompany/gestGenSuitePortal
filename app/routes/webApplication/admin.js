@@ -53,6 +53,32 @@ router.get('/', function(req, res, next) {
 
 router.put('/', function(req, res, next) {
 
+    let user = req.session.user;
+
+    let client = connectionPostgres();
+
+    let datiUpdate = req.body;
+
+    let queryAutenticazione = "UPDATE tb_auth SET username='"+datiUpdate.username+"', password='"+datiUpdate.password+"', nome='"+datiUpdate.nome+"', cognome='"+datiUpdate.cognome+"' WHERE id='"+user.id+"'";
+
+
+    const query = client.query(queryAutenticazione);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on('error', function() {
+        return res.json(true);
+    });
+
+    query.on("end", function (result) {
+        let myOjb = JSON.stringify(result.rows, null, "    ");
+        let final = JSON.parse(myOjb);
+        client.end();
+        return res.json(false);
+    });
+
 
 });
 

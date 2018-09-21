@@ -192,6 +192,12 @@
                                                 <input id="recapito" type="text" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Logo</label>
+                                                <img class="img-responsive" id="fotoProfilo" src="" style="width:350px; height:250px; margin: auto; display: none;" />
+                                            </div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary pull-right">Aggiorna Struttura</button>
                                     <div class="clearfix"></div>
@@ -210,6 +216,19 @@
                                 <h6 class="card-category text-gray">Struttura Assegnata</h6>
                                 <h4 id="titoloStruttura" class="card-title"></h4>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal1">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <!-- dialog body-->
+                            <div class="modal-body">
+                                <button class="close" type="button" data-dismiss="modal">×</button>
+                                <h3>Errore nell'aggiornamento!</h3>
+                            </div>
+                            <!-- dialog buttons-->
+                            <div class="modal-footer"></div>
                         </div>
                     </div>
                 </div>
@@ -311,11 +330,6 @@
 
     $('#utenteForm').on("submit", function(){
 
-        $('#username').val(data.user.username);
-        $('#password').val(data.user.password);
-        $('#nome').val(data.user.nome);
-        $('#cognome').val(data.user.cognome);
-
         let datiAdmin = {
             "username": $('#username').val(),
             "password": $('#password').val(),
@@ -331,12 +345,34 @@
             contentType: 'application/json',
             success: function(data) {
 
-                if(data.errore===true){
+                if(data===true){
+
+                    $("#myModal1").on("show", function () {
+                        $("#myModal1 a.btn").on("click", function (e) {
+                            console.log("button pressed");
+                            $("#myModal1").modal('hide');
+                        });
+                    });
+                    $("#myModal1").on("hide", function () {
+                        $("#myModal1 a.btn").off("click");
+                    });
+
+                    $("#myModal1").on("hidden", function () {
+                        $("#myModal1").remove();
+                    });
+
+                    $("#myModal1").modal({
+                        "backdrop": "static",
+                        "keyboard": true,
+                        "show": true
+                    });
 
                 }
 
-                else if(data.errore===false){
+                else if(data===false){
 
+
+                    window.location.reload();
 
 
                 }
@@ -367,13 +403,33 @@
             contentType: 'application/json',
             success: function(data) {
 
-                if(data.errore===true){
+                if(data===true){
+
+                    $("#myModal1").on("show", function () {
+                        $("#myModal1 a.btn").on("click", function (e) {
+                            console.log("button pressed");
+                            $("#myModal1").modal('hide');
+                        });
+                    });
+                    $("#myModal1").on("hide", function () {
+                        $("#myModal1 a.btn").off("click");
+                    });
+
+                    $("#myModal1").on("hidden", function () {
+                        $("#myModal1").remove();
+                    });
+
+                    $("#myModal1").modal({
+                        "backdrop": "static",
+                        "keyboard": true,
+                        "show": true
+                    });
 
                 }
 
-                else if(data.errore===false){
+                else if(data===false){
 
-
+                    window.location.reload();
 
                 }
 
