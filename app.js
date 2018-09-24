@@ -60,6 +60,7 @@ require('./routes/routes.js')(app);
 
 let loginApp = require('./app/routes/mobileApplication/login');
 let salvaSaldo = require('./app/routes/mobileApplication/salvaSaldo');
+let salvaSaldoWA = require('./app/routes/webApplication/salvaSaldoWA');
 let struttura = require('./app/routes/mobileApplication/struttura');
 let getSaldo = require('./app/routes/mobileApplication/getSaldo');
 let cliente = require('./app/routes/mobileApplication/cliente');
@@ -84,6 +85,7 @@ let swaggerMobile = require('./swaggerMobile.json');
 
 app.use('/loginApp',loginApp);
 app.use('/salvaSaldo',salvaSaldo);
+app.use('/salvaSaldoWA',salvaSaldoWA);
 app.use('/getStruttura',struttura);
 app.use('/getSaldo',getSaldo);
 app.use('/cliente',cliente);

@@ -15,7 +15,7 @@
     <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 
-<body class="">
+<body class="" onload="aggiornaSelect()">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
         <!--
@@ -98,6 +98,75 @@
         <div class="content">
             <div class="container-fluid">
                 <!-- your content here -->
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title ">Saldo</h4>
+                                    <p class="card-category">Visualizza il tuo saldo</p>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating" for="tipo">Tipo Saldo:</label>
+                                                <select class="form-control" id="tipo" placeholder="Seleziona" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating" for="cliente">Cliente:</label>
+                                                <select class="form-control" id="cliente" placeholder="Seleziona" required>
+                                                    <!-- fine div Va riempito con una get su cliente  -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating" for="uscite" style="color:red">Uscite:</label>
+                                                <br>
+                                                <input type="text" id='uscite' name="uscite" value="0" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating" for="entrate" style="color:green">Entrate:</label>
+                                                <br>
+                                                <input type="text" id='entrate' name="entrate" value="0" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <label class="bmd-label-floating" for="saldo">Saldo:</label>
+                                                <br>
+                                                <input type="text" id='saldo' name="saldo" value="0" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
@@ -126,6 +195,17 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+
+<script>
+    function aggiornaSelect() {
+        let dropdownTipo = document.getElementById('tipo');
+        dropdownTipo.length = 0;
+
+        let dropdownCliente = document.getElementById('cliente');
+        dropdownCliente.length = 0;
+    }
+</script>
+
 </body>
 
 </html>
