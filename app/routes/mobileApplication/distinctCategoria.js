@@ -27,29 +27,18 @@ router.post('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
 
     let datiRegistrazione = req.body;
-    let username = datiRegistrazione.username.toLowerCase();
-    let password = datiRegistrazione.password;
-    let admin = datiRegistrazione.admin;
+    let cliente = datiRegistrazione.struttura;
+    let categoria = datiRegistrazione.categoria;
 
-    let queryAutenticazione = '';
-
-    if(username==='\' or \'\'=\''||password==='\' or \'\'=\''){
-
-        username=null;
-        password=null;
-
-    }
 
     let client = connectionPostgres();
 
-    if(admin === true){
-        queryAutenticazione = "SELECT * FROM tb_auth WHERE username='"+username+"' AND password='"+password+"' AND tipo = TRUE";
-    }
-    else if(admin === false ){
-        queryAutenticazione = "SELECT * FROM tb_auth WHERE username='"+username+"' AND password='"+password+"' AND tipo = FALSE";
-    }
 
-    const query = client.query(queryAutenticazione);
+
+    let queryStruttura = "SELECT tb_fornitori.id FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura= '"+cliente+"' AND categoria='"+categoria+"' GROUP by tb_fornitori.id";
+
+
+    const query = client.query(queryStruttura);
 
     query.on("row", function (row, result) {
         result.addRow(row);
@@ -62,23 +51,16 @@ router.post('/', function(req, res, next) {
     query.on("end", function (result) {
         let myOjb = JSON.stringify(result.rows, null, "    ");
         let final = JSON.parse(myOjb);
-        let jsonFinale = {
-            "data": final
-        };
 
-        if(jsonFinale.data.length===1){
+        if (final.length > 0) {
 
             client.end();
-            return res.json({errore:false,id:jsonFinale.data[0]});
+            return res.json({errore: false, id: final});
 
 
-        }else if(jsonFinale.data.length===0){
-
-            client.end();
+        }else{
             return res.json({errore:true});
-
         }
-
     });
 
 

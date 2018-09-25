@@ -27,29 +27,15 @@ router.post('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
 
     let datiRegistrazione = req.body;
-    let username = datiRegistrazione.username.toLowerCase();
-    let password = datiRegistrazione.password;
-    let admin = datiRegistrazione.admin;
+    let cliente = datiRegistrazione.struttura;
 
-    let queryAutenticazione = '';
-
-    if(username==='\' or \'\'=\''||password==='\' or \'\'=\''){
-
-        username=null;
-        password=null;
-
-    }
 
     let client = connectionPostgres();
 
-    if(admin === true){
-        queryAutenticazione = "SELECT * FROM tb_auth WHERE username='"+username+"' AND password='"+password+"' AND tipo = TRUE";
-    }
-    else if(admin === false ){
-        queryAutenticazione = "SELECT * FROM tb_auth WHERE username='"+username+"' AND password='"+password+"' AND tipo = FALSE";
-    }
+    let queryStruttura = "SELECT DISTINCT fornitore FROM tb_prodotti WHERE struttura='"+cliente+"'";
 
-    const query = client.query(queryAutenticazione);
+
+    const query = client.query(queryStruttura);
 
     query.on("row", function (row, result) {
         result.addRow(row);
@@ -66,19 +52,15 @@ router.post('/', function(req, res, next) {
             "data": final
         };
 
-        if(jsonFinale.data.length===1){
+        if (jsonFinale.data.length > 0) {
 
             client.end();
-            return res.json({errore:false,id:jsonFinale.data[0]});
+            return res.json({errore: false, id: jsonFinale.data});
 
 
-        }else if(jsonFinale.data.length===0){
-
-            client.end();
+        }else{
             return res.json({errore:true});
-
         }
-
     });
 
 

@@ -38,6 +38,10 @@ module.exports = function (app) {
         res.render('utenti');
     });
 
+    app.get('/privacy', function (req, res, next) {
+        res.render('privacy');
+    });
+
     app.get('/logout', function (req, res, next) {
         delete req.session.authenticated;
         res.redirect('/');

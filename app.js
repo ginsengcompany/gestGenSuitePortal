@@ -73,6 +73,8 @@ let categoria = require('./app/routes/mobileApplication/categoria');
 let fornitore = require('./app/routes/mobileApplication/fornitore');
 let prodotti = require('./app/routes/mobileApplication/prodotti');
 let invioEmail = require('./app/routes/mobileApplication/invioEmail');
+let distinctFornitori = require('./app/routes/mobileApplication/distinctFornitori');
+let distinctCategoria = require('./app/routes/mobileApplication/distinctCategoria');
 
 let clienteStruttura = require('./app/routes/webApplication/clienteStruttura');
 
@@ -97,6 +99,8 @@ app.use('/categoria',categoria);
 app.use('/fornitore',fornitore);
 app.use('/prodotti',prodotti);
 app.use('/invioEmail',invioEmail);
+app.use('/distinctFornitori',distinctFornitori);
+app.use('/distinctCategoria', distinctCategoria);
 
 
 app.use('/clienteStruttura',clienteStruttura);

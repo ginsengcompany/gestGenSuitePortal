@@ -37,19 +37,19 @@ router.post('/', function (req, res, next) {
     let client = connectionPostgres();
 
     if (tipo === 'multipla') {
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "'";
+        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' order by tb_fornitori.id";
     }
     else if (tipo === 'categoria') {
 
         let categoria = datiSaldo.categoria;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND categoria='"+categoria+"'";
+        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND categoria='"+categoria+"' order by tb_fornitori.id";
     }
     else if (tipo === 'fornitore'){
 
         let fornitore = datiSaldo.fornitore;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"'";
+        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' order by tb_fornitori.id";
 
     }
     else if (tipo === 'double'){
@@ -57,7 +57,7 @@ router.post('/', function (req, res, next) {
         let fornitore = datiSaldo.fornitore;
         let categoria = datiSaldo.categoria;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' AND categoria='"+categoria+"'";
+        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' AND categoria='"+categoria+"' order by tb_fornitori.id";
 
     }
 
