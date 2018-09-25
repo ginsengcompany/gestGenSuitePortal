@@ -16,7 +16,7 @@
     <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
 </head>
 
-<body class="">
+<body class="" onload="aggiornaSelect()">
 <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white">
         <!--
@@ -113,16 +113,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating" for="tipo">Seleziona tipo:</label>
-                                                <select class="form-control" id="tipo" placeholder="Seleziona">
+                                                <select class="form-control" id="tipo" placeholder="Seleziona" required>
+                                                    <option value="" disabled selected>Seleziona</option>
                                                     <option value="incasso">INCASSO</option>
                                                     <option value="pagamento">PAGAMENTO</option>
+                                                    <option value="sospeso">SOSPESO</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating" for="modalita">Modalità</label>
-                                                <select class="form-control" id="modalita" placeholder="Seleziona">
+                                                <select class="form-control" id="modalita" placeholder="Seleziona" required>
+                                                    <option value="" disabled selected>Seleziona</option>
                                                     <option value="bonifico">BONIFICO</option>
                                                     <option value="carta">CARTA DI CREDITO</option>
                                                     <option value="contanti">CONTANTI</option>
@@ -131,9 +134,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating" for="cliente">Modalità</label>
-                                                <select class="form-control" id="cliente" placeholder="Seleziona">
-                                                    <option value="keyvalue">keytext</option>
+                                                <label class="bmd-label-floating" for="cliente">Cliente</label>
+                                                <select class="form-control" id="cliente" placeholder="Seleziona" required>
                                                     <!-- fine div Va riempito con una get su cliente  -->
                                                 </select>
                                             </div>
@@ -144,7 +146,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn">Aggiungi cliente <i class="icon-right"></i></button>
+                                                <button class="btn lt-register-btn" onclick="aggiungiCliente()">Aggiungi cliente <i class="icon-right"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -154,19 +156,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating" for="descrizione">Descrizione</label>
-                                                <input id="descrizione"  class="form-control" placeholder="Inserire Descrizione">
+                                                <input id="descrizione"  class="form-control" placeholder="Inserire Descrizione" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4"  style="z-index: 2;position: relative">
                                             <div class="form-group bmd-form-group">
                                                 <label for="datepicker">Selezionare data</label>
-                                                <input class="form-control" type="text" id="datepicker">
+                                                <input class="form-control" type="text" id="datepicker" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
                                                 <label for="importo">Inserire importo</label>
-                                                <input class="form-control" type="text" id="importo"/>
+                                                <input class="form-control" type="text" id="importo" required>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +176,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn">Scatta foto</button>
+                                                <button class="btn lt-register-btn" disabled>Scatta foto</button>
                                                 <!-- fine div Va fatto un metodo (click)="takePhoto()"  -->
                                             </div>
                                         </div>
@@ -185,13 +187,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn">Aggiungi foto</button>
+                                                <button class="btn lt-register-btn" disabled>Aggiungi foto</button>
                                                 <!-- fine div Va fatto un metodo (click)="takePhoto()"  -->
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button class="btn lt-register-btn">Submit</button>
+                                    <button class="btn lt-register-btn" onclick="salvaSaldoWA()">Submit</button>
 
                                 </form>
                             </div>
@@ -227,14 +229,126 @@
 <script src="assets/js/jquery.maskMoney.js"></script>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    function aggiornaSelect() {
+
+        let dropdown = document.getElementById('cliente');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/clienteStruttura';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].text;
+                    option.value = data["data"][i].value;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+</script>
+
+<script>
+    function aggiungiCliente() {
+        let value;
+        let cliente = prompt("Inserisci il cliente:", "Tipo Cliente");
+        if (cliente === null || cliente === "") {
+            value = "Errore! Non hai inserito nessuna descrizione cliente.";
+            alert(value);
+        } else {
+            value = cliente;
+            const url = 'http://localhost:3000/clienteStruttura';
+            $.ajax({
+                url: url,
+                type: 'PUT',   //type is any HTTP method
+                data: {
+                    value: value
+                },
+                success: function (response) {
+                    alert(value + " inserito!");
+                    aggiornaSelect();
+                },
+                failure: function () {
+                    alert(value + " errore di inserimento!");
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+    function salvaSaldoWA() {
+        const url =  'http://localhost:3000/salvaSaldoWA';
+
+        let gg = document.getElementById("datepicker").value.substring(3,5);
+        let mm = document.getElementById("datepicker").value.substring(0,2);
+        let yy = document.getElementById("datepicker").value.substring(6,10);
+        var imp = $('#importo').maskMoney('unmasked')[0];
+
+        let datiSaldo = {
+            tipo: document.getElementById("tipo").value,
+            modalita: document.getElementById("modalita").value,
+            cliente: document.getElementById("cliente").value,
+            descrizione: document.getElementById("descrizione").value,
+            data: yy+'-'+mm+'-'+gg,
+            importo: imp
+            //foto: ''
+        };
+
+        console.log(datiSaldo);
+
+        $.ajax({
+            url: url,
+            type: 'POST',   //type is any HTTP method
+            data: {
+                data: datiSaldo
+            },
+            success: function (response) {
+                alert(datiSaldo + " inserito!");
+                console.log(response);
+            },
+            failure: function () {
+                alert(datiSaldo + " errore di inserimento!");
+            }
+        });
+    }
+</script>
+
 <script>
     $( function() {
-        $( "#datepicker" ).datepicker();
-    } );
+        $("#datepicker").datepicker({
+            onSelect: function() {
+                let dateObject = $(this).datepicker('getDate');
+            }
+        });
+    });
 </script>
 
 <script type="text/javascript">
-    $("#importo").maskMoney({thousands:',', decimal:'.', allowZero: true, suffix: ' €'});
+    // suffix: ' €'
+    $("#importo").maskMoney({thousands:',', decimal:'.', allowZero: true, suffix: ''});
 </script>
 
 </body>

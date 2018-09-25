@@ -2,7 +2,6 @@ let express = require('express');
 let router = express.Router();
 let postgresConnection = require('../../../config/postgres');
 
-
 let connectionPostgres = function () {
     return postgresConnection();
 };
@@ -20,7 +19,6 @@ router.options('/', function(req, res, next) {
     return res.json({errore:true});
 
 });
-
 
 router.post('/', function(req, res, next) {
 
@@ -65,7 +63,5 @@ router.post('/', function(req, res, next) {
 
 
 });
-
-
 
 module.exports = router;
