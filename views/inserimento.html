@@ -114,8 +114,10 @@
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating" for="tipo">Seleziona tipo:</label>
                                                 <select class="form-control" id="tipo" placeholder="Seleziona" required>
+                                                    <option value="" disabled selected>Seleziona</option>
                                                     <option value="incasso">INCASSO</option>
                                                     <option value="pagamento">PAGAMENTO</option>
+                                                    <option value="sospeso">SOSPESO</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -123,6 +125,7 @@
                                             <div class="form-group bmd-form-group">
                                                 <label class="bmd-label-floating" for="modalita">Modalità</label>
                                                 <select class="form-control" id="modalita" placeholder="Seleziona" required>
+                                                    <option value="" disabled selected>Seleziona</option>
                                                     <option value="bonifico">BONIFICO</option>
                                                     <option value="carta">CARTA DI CREDITO</option>
                                                     <option value="contanti">CONTANTI</option>
@@ -233,10 +236,10 @@
         let dropdown = document.getElementById('cliente');
         dropdown.length = 0;
 
-        //let defaultOption = document.createElement('option');
-        //defaultOption.text = 'Choose State/Province';
-        //dropdown.add(defaultOption);
-        //dropdown.selectedIndex = 0;
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
 
         const url = 'http://localhost:3000/clienteStruttura';
 
@@ -302,6 +305,7 @@
         let gg = document.getElementById("datepicker").value.substring(3,5);
         let mm = document.getElementById("datepicker").value.substring(0,2);
         let yy = document.getElementById("datepicker").value.substring(6,10);
+        var imp = $('#importo').maskMoney('unmasked')[0];
 
         let datiSaldo = {
             tipo: document.getElementById("tipo").value,
@@ -309,7 +313,7 @@
             cliente: document.getElementById("cliente").value,
             descrizione: document.getElementById("descrizione").value,
             data: yy+'-'+mm+'-'+gg,
-            importo: document.getElementById("importo").value
+            importo: imp
             //foto: ''
         };
 
@@ -343,7 +347,8 @@
 </script>
 
 <script type="text/javascript">
-    $("#importo").maskMoney({thousands:',', decimal:'.', allowZero: true, suffix: ' €'});
+    // suffix: ' €'
+    $("#importo").maskMoney({thousands:',', decimal:'.', allowZero: true, suffix: ''});
 </script>
 
 </body>
