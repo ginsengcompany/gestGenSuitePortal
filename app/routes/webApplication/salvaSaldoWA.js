@@ -7,22 +7,8 @@ let connectionPostgres = function () {
     return postgresConnection();
 };
 
-router.options('/', function(req, res, next) {
-
-    if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-        res.setHeader('Access-Control-Allow-Credentials', true);
-        res.setHeader('Access-Control-Allow-Headers', 'authorization, content-type');
-    }
-
-    return res.json({errore:true});
-
-});
-
-
 router.post('/', function(req, res, next) {
 
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     let user = req.session.user;
 
     let datiInsert = req.body.data;
