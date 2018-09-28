@@ -206,8 +206,21 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="bmd-label-floating">Logo</label>
-                                                <img class="img-responsive" id="fotoProfilo" src="" style="width:350px; height:250px; margin: auto; display: none;" />
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Logo</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="inp">
+                                                    <label class="custom-file-label" for="inp">Scegli File</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Anteprima</label>
+                                                <img id="img" height="150">
                                             </div>
                                         </div>
                                     </div>
@@ -278,6 +291,24 @@
 
     $( document ).ready(function() {
 
+        function readFile() {
+
+            if (this.files && this.files[0]) {
+
+                var FR= new FileReader();
+
+                FR.addEventListener("load", function(e) {
+                    document.getElementById("img").src       = e.target.result;
+                    document.getElementById("b64").innerHTML = e.target.result;
+                });
+
+                FR.readAsDataURL( this.files[0] );
+            }
+
+        }
+
+        document.getElementById("inp").addEventListener("change", readFile);
+
         $.ajax({
             url: '/getAdmin',
             type: 'GET',
@@ -308,6 +339,8 @@
                                 $('#indirizzo').val(data.struttura.indirizzo);
                                 $('#recapito').val(data.struttura.recapito);
                                 $('#titoloStruttura').text(data.struttura.nome);
+                                $('#img').attr("src",data.struttura.img);
+
 
 
 
@@ -404,7 +437,8 @@
         let datiStruttura = {
             "nomeStruttura": $('#nomeStruttura').val(),
             "indirizzo": $('#indirizzo').val() ,
-            "recapito": $('#recapito').val()
+            "recapito": $('#recapito').val(),
+            "text": $('#img').attr("src")
         };
 
         $.ajax({
