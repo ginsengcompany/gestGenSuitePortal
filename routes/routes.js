@@ -42,6 +42,14 @@ module.exports = function (app) {
         res.render('privacy');
     });
 
+    app.get('/prodotti', function (req, res, next) {
+        res.render('prodotti');
+    });
+
+    app.get('/fornitori', function (req, res, next) {
+        res.render('fornitori');
+    });
+
     app.get('/logout', function (req, res, next) {
         delete req.session.authenticated;
         res.redirect('/');
