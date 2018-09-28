@@ -73,6 +73,7 @@ let utentiStruttura = require('./app/routes/webApplication/utentiStruttura');
 
 let categoria = require('./app/routes/mobileApplication/categoria');
 let fornitore = require('./app/routes/mobileApplication/fornitore');
+let getFornitoreWA = require('./app/routes/webApplication/getFornitoreWA');
 let prodotti = require('./app/routes/mobileApplication/prodotti');
 let invioEmail = require('./app/routes/mobileApplication/invioEmail');
 let distinctFornitori = require('./app/routes/mobileApplication/distinctFornitori');
@@ -101,6 +102,7 @@ app.use('/utentiStruttura',utentiStruttura);
 
 app.use('/categoria',categoria);
 app.use('/fornitore',fornitore);
+app.use('/getFornitoreWA',getFornitoreWA);
 app.use('/prodotti',prodotti);
 app.use('/invioEmail',invioEmail);
 app.use('/distinctFornitori',distinctFornitori);
