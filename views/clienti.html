@@ -70,7 +70,7 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="/prodotti">
-                        <i class="material-icons">restaurant_menu</i>
+                        <i class="material-icons">attach_money</i>
                         <p>Prodotti</p>
                     </a>
                 </li>
@@ -114,18 +114,101 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary">
-                                <h4 class="card-title ">Simple Table</h4>
-                                <p class="card-category"> Here is a subtitle for this table</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title ">Tabella Clienti</h4>
+                                        <p class="card-category">Gestisci i clienti per la modalita inserimento in Mobile Application</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div style="float: right">
+                                            <button type="button" id="aggiungiCliente" onclick="openModalIn()" class="btn btn-primary block" data-toggle="modal" data-target="#insert" data-tooltip="tooltip" data-placement="top" title="Aggiungi Cliente">Aggiungi <i class="fa fa-plus"></i></button>
+                                            <button type="button" id="modificaCliente" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Cliente">Aggiorna <i class="fa fa-pencil"></i></button>
+                                            <button type="button" id="eliminaCliente" onclick="openModalDel()" class="btn btn-primary block" data-toggle="modal" data-target="#delete" data-tooltip="tooltip" data-placement="top" title="Elimina Cliente">Elimina <i class="fa fa-remove"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="table" class="display" style="width:100%">
                                         <thead>
-                                        <th>value</th>
-                                        <th>text</th>
+                                        <th>Descrizione</th>
                                         </thead>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Inserisci Cliente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Cliente</label>
+                                            <input id="value1" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaUtente('inserimento')">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modifica Cliente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Cliente</label>
+                                            <input id="value2" type="text" class="form-control" required>
+                                            <input id="id2" type="text" class="form-control" required hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaUtente('aggiornamento')">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Elimina Cliente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input id="id3" type="text" class="form-control" required hidden>
+                                <p>Sei sicuro di voler eliminare questo cliente ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-danger" onclick="salvaUtente('eliminazione')">Elimina</button>
                             </div>
                         </div>
                     </div>
@@ -161,9 +244,9 @@
 <script src="assets/js/plugins/DataTables.js" type="text/javascript"></script>
 
 <script>
-    var arrayClient = {};
+    let arrayClient = {};
 
-    datiCliente = {
+    let datiCliente = {
         "id": undefined,
         "value": undefined,
         "text": undefined,
@@ -171,6 +254,9 @@
     };
 
     $(document).ready(function () {
+        $('#modificaCliente').prop('disabled', true);
+        $('#eliminaCliente').prop('disabled', true);
+
         table = $('#table').DataTable({
             ajax: "/clienteStruttura",
             ajaxSettings: {
@@ -178,8 +264,7 @@
                 cache: false
             },
             columns: [
-                {"data": "value"},
-                {"data": "text"},
+                {"data": "text"}
             ],
             responsive: {
                 details: {
@@ -192,20 +277,20 @@
                 orderable: false,
                 targets: 0
             }],
-            order: [1, 'asc']
+            order: [0, 'asc']
         });
 
         $('#table tbody').on('click', 'tr', function () {
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
-                $('#modificaClient').prop('disabled', true);
-                $('#eliminaClient').prop('disabled', true);
+                $('#modificaCliente').prop('disabled', true);
+                $('#eliminaCliente').prop('disabled', true);
             }
             else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-                $('#modificaClient').prop('disabled', false);
-                $('#eliminaClient').prop('disabled', false);
+                $('#modificaCliente').prop('disabled', false);
+                $('#eliminaCliente').prop('disabled', false);
             }
         });
 
@@ -225,6 +310,149 @@
             }
         });
     });
+
+    function openModalIn(){
+
+
+    }
+
+    function openModalUp(){
+
+        let ids1 = $.map(table.rows('.selected').data(), function (item) {
+            return item;
+        });
+        arrayClient = ids1;
+
+        $('#value2').val(arrayClient[0].text);
+        $('#id2').val(arrayClient[0].id);
+
+    }
+
+    function openModalDel(){
+
+        let ids1 = $.map(table.rows('.selected').data(), function (item) {
+            return item;
+        });
+        arrayClient = ids1;
+
+        $('#id3').val(arrayClient[0].id);
+
+    }
+
+    function salvaUtente(tipo){
+
+        let datiInsert = {
+            "value": "",
+            "text": "",
+            "struttura": "",
+            "id": ""
+        };
+
+        if(tipo === 'inserimento'){
+
+            datiInsert.value = $('#value1').val();
+
+            $.ajax({
+                url: '/clienteStruttura',
+                type: 'POST',
+                cache: false,
+                contentType: 'application/json',
+                data: JSON.stringify(datiInsert),
+                success: function(data) {
+
+                    if(data===false){
+
+                        $('#insert').hide();
+                        $('.modal-backdrop').remove();
+                        table.ajax.reload();
+                        $('#value1').val('');
+
+                    }
+                    else if(data===true){
+
+
+
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+
+        }
+
+        if(tipo === 'aggiornamento'){
+
+            datiInsert.value = $('#value2').val();
+            datiInsert.id = $('#id2').val();
+
+            $.ajax({
+                url: '/clienteStruttura/'+datiInsert.id,
+                type: 'PUT',
+                data: JSON.stringify(datiInsert),
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+
+                    if(data===true){
+
+
+                    }
+
+                    else if(data===false){
+
+                        $('#update').hide();
+                        $('.modal-backdrop').remove();
+                        table.ajax.reload();
+                        $('#value2').val('');
+                        $('#id2').val('');
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+
+        }
+
+        if(tipo === 'eliminazione'){
+
+            datiInsert.id = $('#id3').val();
+
+            $.ajax({
+                url: '/clienteStruttura/'+datiInsert.id,
+                type: 'DELETE',
+                data: JSON.stringify(datiInsert),
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+
+                    if(data===true){
+
+
+                    }
+
+                    else if(data===false){
+
+                        $('#delete').hide();
+                        $('.modal-backdrop').remove();
+                        table.ajax.reload();
+                        $('#id3').val('');
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+
+        }
+    }
 </script>
 </body>
 

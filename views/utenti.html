@@ -249,7 +249,7 @@
                             </div>
                             <div class="modal-body">
                                 <input id="id3" type="text" class="form-control" required hidden>
-                                <p>Sei sicuro di voler eliminare questo utente ?.</p>
+                                <p>Sei sicuro di voler eliminare questo utente ?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
@@ -373,7 +373,7 @@
     function openModalIn(){
 
 
-    };
+    }
 
     function openModalUp(){
 
@@ -388,7 +388,7 @@
         $('#cognome2').val(arrayUtenti[0].cognome);
         $('#id2').val(arrayUtenti[0].id);
 
-    };
+    }
 
     function openModalDel(){
 
@@ -399,7 +399,7 @@
 
         $('#id3').val(arrayUtenti[0].id);
 
-    };
+    }
 
     function salvaUtente(tipo){
 
@@ -516,7 +516,7 @@
                         $('#delete').hide();
                         $('.modal-backdrop').remove();
                         table.ajax.reload();
-                        $('#id3').val();
+                        $('#id3').val('');
 
                     }
 

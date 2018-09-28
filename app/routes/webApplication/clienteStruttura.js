@@ -37,8 +37,8 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.put('/', function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+router.post('/', function(req, res, next) {
+
     let user = req.session.user;
 
     let datiInsert = req.body;
@@ -56,6 +56,7 @@ router.put('/', function(req, res, next) {
         "'" + text     +"', " +
         "'" + struttura   +"')";
 
+
     const query = client.query(queryPostSaldo);
 
     query.on("row", function (row, result) {
@@ -63,15 +64,77 @@ router.put('/', function(req, res, next) {
     });
 
     query.on('error', function() {
-        return res.json(false);
+        return res.json(true);
     });
 
     query.on("end", function (result) {
         let myOjb = JSON.stringify(result.rows, null, "    ");
         let final = JSON.parse(myOjb);
         client.end();
+        return res.json(false);
+    });
+
+
+});
+
+router.put('/:id', function(req, res, next) {
+
+    let id = req.params.id;
+
+    let client = connectionPostgres();
+
+    let datiUpdate = req.body;
+
+    let queryAutenticazione = "UPDATE tb_cliente SET value='"+datiUpdate.value.toLowerCase()+"', text='"+datiUpdate.value.toUpperCase()+"' WHERE id='"+id+"'";
+
+
+    const query = client.query(queryAutenticazione);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on('error', function() {
         return res.json(true);
     });
+
+    query.on("end", function (result) {
+        let myOjb = JSON.stringify(result.rows, null, "    ");
+        let final = JSON.parse(myOjb);
+        client.end();
+        return res.json(false);
+    });
+
+
+});
+
+router.delete('/:id', function(req, res, next) {
+
+    let id = req.params.id;
+
+    let client = connectionPostgres();
+
+    let queryAutenticazione = "DELETE FROM tb_cliente WHERE id='"+id+"'";
+
+
+    const query = client.query(queryAutenticazione);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on('error', function() {
+        return res.json(true);
+    });
+
+    query.on("end", function (result) {
+        let myOjb = JSON.stringify(result.rows, null, "    ");
+        let final = JSON.parse(myOjb);
+        client.end();
+        return res.json(false);
+    });
+
+
 });
 
 module.exports = router;
