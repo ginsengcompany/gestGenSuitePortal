@@ -68,7 +68,7 @@ module.exports = function (app) {
         res.render('privacy');
     });
 
-    app.get('/prodotti', function (req, res, next) {
+    app.get('/prodottiStruttura', function (req, res, next) {
         res.render('prodotti');
     });
 

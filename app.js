@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 
 function checkAuth (req, res, next) {
 
-    if ((req.url === '/dashboard'  || req.url === '/profilo'  || req.url === '/utenti'  || req.url === '/clienti'  || req.url === '/inserimento' || req.url === '/saldo'|| req.url === '/prodotti'|| req.url === '/fornitori' ||  req.url === '/dashboardAdministrator' || req.url === '/strutture' || req.url === '/utentiAdmin' ) && (!req.session || !req.session.authenticated)) {
+    if ((req.url === '/dashboard'  || req.url === '/profilo'  || req.url === '/utenti'  || req.url === '/clienti'  || req.url === '/inserimento' || req.url === '/saldo'|| req.url === '/prodottiStruttura'|| req.url === '/fornitori' ||  req.url === '/dashboardAdministrator' || req.url === '/strutture' || req.url === '/utentiAdmin' ) && (!req.session || !req.session.authenticated)) {
         res.render('login', { status: 403 });
         return;
     }
