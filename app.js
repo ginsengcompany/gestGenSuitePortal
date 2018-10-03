@@ -46,7 +46,7 @@ app.use(function (req, res, next) {
 
 function checkAuth (req, res, next) {
 
-    if ((req.url === '/dashboard'  || req.url === '/profilo'  || req.url === '/utenti'  || req.url === '/clienti'  || req.url === '/inserimento' || req.url === '/saldo'|| req.url === '/prodotti'|| req.url === '/fornitori') && (!req.session || !req.session.authenticated)) {
+    if ((req.url === '/dashboard'  || req.url === '/profilo'  || req.url === '/utenti'  || req.url === '/clienti'  || req.url === '/inserimento' || req.url === '/saldo'|| req.url === '/prodotti'|| req.url === '/fornitori' ||  req.url === '/dashboardAdministrator' || req.url === '/strutture' || req.url === '/utentiAdmin' ) && (!req.session || !req.session.authenticated)) {
         res.render('login', { status: 403 });
         return;
     }
@@ -70,6 +70,16 @@ let loginWeb = require('./app/routes/webApplication/login');
 let admin = require('./app/routes/webApplication/admin');
 let strutturaWeb = require('./app/routes/webApplication/struttura');
 let utentiStruttura = require('./app/routes/webApplication/utentiStruttura');
+let loginWebAdmin = require('./app/routes/webApplication/loginWebAdmin');
+let utentiStrutturaAdmin = require('./app/routes/webApplication/utentiStrutturaAdmin');
+let strutturaAdmin = require('./app/routes/webApplication/strutturaAdmin');
+let countStrutture = require('./app/routes/webApplication/countStrutture');
+let countUtente = require('./app/routes/webApplication/countUtente');
+let getCategoria = require('./app/routes/webApplication/getCategoria');
+let getProdotti = require('./app/routes/webApplication/getProdotti');
+let distinctFornitoriWA = require('./app/routes/webApplication/distinctFornitoriWA');
+let distinctCategoriaWA = require('./app/routes/webApplication/distinctCategoriaWA');
+let invioEmailWA = require('./app/routes/webApplication/invioEmailWA');
 
 let categoria = require('./app/routes/mobileApplication/categoria');
 let fornitore = require('./app/routes/mobileApplication/fornitore');
@@ -99,6 +109,17 @@ app.use('/loginWeb',loginWeb);
 app.use('/getAdmin',admin);
 app.use('/getStrutturaWeb',strutturaWeb);
 app.use('/utentiStruttura',utentiStruttura);
+app.use('/loginWebAdmin',loginWebAdmin);
+app.use('/utentiStrutturaAdmin',utentiStrutturaAdmin);
+app.use('/strutturaAdmin',strutturaAdmin);
+app.use('/countStrutture',countStrutture);
+app.use('/countUtente',countUtente);
+app.use('/getCategoria',getCategoria);
+app.use('/getProdotti',getProdotti);
+app.use('/distinctFornitoriWA',distinctFornitoriWA);
+app.use('/distinctCategoriaWA', distinctCategoriaWA);
+app.use('/invioEmailWA', invioEmailWA);
+
 
 app.use('/categoria',categoria);
 app.use('/fornitore',fornitore);

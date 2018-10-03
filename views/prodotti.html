@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="/logout?id=user">
                         <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
                     </a>
@@ -109,7 +109,133 @@
         <!-- End Navbar -->
         <div class="content">
             <div class="container-fluid">
-                <!-- your content here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="card-title ">Prodotti</h4>
+                                        <p class="card-category">Inserisci la quantità prodotto per inoltro e-mail fornitore</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div style="float: right">
+                                            <button type="button" id="aggiungiUtente" class="btn btn-primary block" data-toggle="modal" data-target="#insert" data-tooltip="tooltip" data-placement="top" title="Aggiungi Prodotto">Aggiungi <i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Categoria</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect01" onchange="aggiornaLista()">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect02">Fornitore</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect02" onchange="aggiornaLista()">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="listaProducts">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12" id="foo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal1">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <!-- dialog body-->
+                            <div class="modal-body">
+                                <button class="close" type="button" data-dismiss="modal">×</button>
+                                <h3>Richiesta Inviata Con Successo!</h3>
+                            </div>
+                            <!-- dialog buttons-->
+                            <div class="modal-footer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Aggiungi Prodotto</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Codice</label>
+                                            <input id="codice" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Descrizione</label>
+                                            <input id="descrizione" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="categoria">Categoria</label>
+                                            </div>
+                                            <select class="custom-select" id="categoria">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button type="button" class="btn btn-primary" onclick="aggiungiCategoria()">Aggiungi Categoria</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="fornitore">Fornitore</label>
+                                            </div>
+                                            <select class="custom-select" id="fornitore">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaProdotto()">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -138,6 +264,685 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+
+<script>
+
+    let datiInsert = {
+        "codice" : "",
+        "descrizione" : "",
+        "categoria" : "",
+        "fornitore" : ""
+    };
+
+    document.getElementById("listaProducts").style.display = "none";
+
+    function aggiornaSelect() {
+
+        let dropdown = document.getElementById('inputGroupSelect02');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/getFornitoreWA';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].nome_descrizione;
+                    option.value = data["data"][i].id;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+
+    aggiornaSelect();
+
+    function aggiornaSelect1() {
+
+        let dropdown = document.getElementById('inputGroupSelect01');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/getCategoria';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].text;
+                    option.value = data["data"][i].id;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+
+    aggiornaSelect1();
+
+    function aggiornaSelect2() {
+
+        let dropdown = document.getElementById('fornitore');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/getFornitoreWA';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].nome_descrizione;
+                    option.value = data["data"][i].id;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+
+    aggiornaSelect2();
+
+    function aggiornaSelect3() {
+
+        let dropdown = document.getElementById('categoria');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/getCategoria';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].text;
+                    option.value = data["data"][i].id;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+
+    aggiornaSelect3();
+
+    function aggiornaLista() {
+
+        visualizza();
+
+    }
+
+    function visualizza() {
+
+        document.getElementById("listaProducts").style.display = "none";
+
+        let data = null;
+
+        let listaProdotti = "";
+
+        console.log($('#inputGroupSelect01').val());
+        console.log($('#inputGroupSelect02').val());
+
+        if($('#inputGroupSelect01').val() === 'Seleziona' && $('#inputGroupSelect02').val() === 'Seleziona'){
+
+            data = JSON.stringify({"tipo": "multipla"});
+
+            $.ajax({
+                url: '/getProdotti',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+                    let a = JSON.stringify(data);
+                    let b = JSON.parse(a);
+
+                    if(b.errore===false){
+
+                        listaProdotti = b.id;
+
+                        const grouped = groupBy(listaProdotti, pet => pet.fornitore);
+
+                        $.ajax({
+                            url: '/distinctFornitoriWA',
+                            type: 'POST',
+                            cache: false,
+                            contentType: 'application/json',
+                            success: function (data) {
+
+                                let a = JSON.stringify(data);
+                                let b = JSON.parse(a);
+
+                                if(b.errore===false){
+
+                                    let newArrayList = [];
+
+                                    for(let i =0; i<b.id.length; i++){
+
+                                        newArrayList.push(grouped.get(b.id[i].fornitore));
+
+                                    }
+
+                                    $('#foo').empty();
+                                    document.getElementById('foo').appendChild(makeUL(newArrayList));
+
+
+
+                                }
+                                else if(b.errore===true){
+
+                                }
+
+                            },
+                            faliure: function (data) {
+
+                            }
+                        });
+
+                        document.getElementById("listaProducts").style.display = "block";
+
+                    }
+
+                    else if(b.errore===true){
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+        } //OK
+        else if($('#inputGroupSelect01').val() !== 'Seleziona'  && $('#inputGroupSelect02').val() !== 'Seleziona'){
+
+            data = JSON.stringify({"tipo": "double", "fornitore":  $('#inputGroupSelect02').val(),"categoria": $('#inputGroupSelect01').val()});
+
+            $.ajax({
+                url: '/getProdotti',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+                    let a = JSON.stringify(data);
+                    let b = JSON.parse(a);
+
+                    if(b.errore===false){
+
+                        listaProdotti = b.id;
+
+                        const grouped = groupBy(listaProdotti, pet => pet.fornitore);
+
+                        let newArrayList = [];
+
+                        newArrayList.push(grouped.get($('#inputGroupSelect02').val()));
+
+                        $('#foo').empty();
+                        document.getElementById('foo').appendChild(makeUL(newArrayList));
+
+                        document.getElementById("listaProducts").style.display = "block";
+
+                    }
+
+                    else if(b.errore===true){
+
+                    }
+
+
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+        } //OK
+        else if($('#inputGroupSelect01').val().length > 0 && $('#inputGroupSelect02').val() === 'Seleziona'){
+
+            data = JSON.stringify({"tipo": "categoria", "categoria": $('#inputGroupSelect01').val()});
+
+            $.ajax({
+                url: '/getProdotti',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+                    let a = JSON.stringify(data);
+                    let b = JSON.parse(a);
+
+                    if(b.errore===false){
+
+                        listaProdotti = b.id;
+
+                        const grouped = groupBy(listaProdotti, pet => pet.fornitore);
+
+                        $.ajax({
+                            url: '/distinctCategoriaWA',
+                            type: 'POST',
+                            data: JSON.stringify({"categoria": $('#inputGroupSelect01').val()}),
+                            cache: false,
+                            contentType: 'application/json',
+                            success: function (data) {
+
+                                let a = JSON.stringify(data);
+                                let b = JSON.parse(a);
+
+                                if(b.errore===false){
+
+                                    let newArrayList = [];
+
+                                    for(let i =0; i<b.id.length; i++){
+
+                                        newArrayList.push(grouped.get(b.id[i].id));
+
+                                    }
+
+                                    $('#foo').empty();
+                                    document.getElementById('foo').appendChild(makeUL(newArrayList));
+
+
+                                }
+                                else if(b.errore===true){
+
+                                }
+
+                            },
+                            faliure: function (data) {
+
+                            }
+                        });
+
+                        document.getElementById("listaProducts").style.display = "block";
+
+                    }
+
+                    else if(b.errore===true){
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+        } //OK
+        else if($('#inputGroupSelect02').val() > 0 && $('#inputGroupSelect01').val() === 'Seleziona'){
+
+            data = JSON.stringify({"tipo": "fornitore","fornitore": $('#inputGroupSelect02').val()});
+
+            $.ajax({
+                url: '/getProdotti',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+                    let a = JSON.stringify(data);
+                    let b = JSON.parse(a);
+
+                    if(b.errore===false){
+
+                        listaProdotti = b.id;
+
+                        const grouped = groupBy(listaProdotti, pet => pet.fornitore);
+
+                        let newArrayList = [];
+
+                        newArrayList.push(grouped.get($('#inputGroupSelect02').val()));
+
+                        $('#foo').empty();
+                        document.getElementById('foo').appendChild(makeUL(newArrayList));
+
+                        document.getElementById("listaProducts").style.display = "block";
+
+                    }
+
+                    else if(b.errore===true){
+
+                    }
+
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+        } //OK
+
+    }
+
+   function groupBy(list, keyGetter) {
+        const map = new Map();
+        list.forEach((item) => {
+            const key = keyGetter(item);
+            const collection = map.get(key);
+            if (!collection) {
+                map.set(key, [item]);
+            } else {
+                collection.push(item);
+            }
+        });
+        return map;
+    }
+
+    function makeUL(array) {
+
+        console.log(array);
+        // Create the list element:
+        let list = document.createElement('ul');
+
+        list.className = "list-group";
+
+        for(let i = 0; i < array.length; i++) {
+            let board = document.createElement('div');
+
+            board.style.cssText = "background-color:#86ca00;padding-top:10px;padding-bottom:10px;padding-left:5px;color:white";
+
+            board.appendChild(document.createTextNode(array[i][0].nome_descrizione));
+
+            list.appendChild(board);
+
+            let list1 = document.createElement('ul');
+
+            list1.className = "list-group";
+
+            let arrayForlist = array[i];
+
+            for(let j=0; j<arrayForlist.length; j++){
+
+                // Create the list item:
+                let item1 = document.createElement('li');
+
+                item1.className = 'list-group-item';
+
+                // Set its contents:
+                item1.appendChild(document.createTextNode("Codice: "+arrayForlist[j].codice));
+
+                // Add it to the list:
+                list1.appendChild(item1);
+
+
+                // Create the list item:
+                let item2 = document.createElement('li');
+
+                item2.className = 'list-group-item';
+
+                // Set its contents:
+                item2.appendChild(document.createTextNode("Descrizione: "+arrayForlist[j].descrizione));
+
+                // Add it to the list:
+                list1.appendChild(item2);
+
+                // Create the list item:
+                let item3 = document.createElement('li');
+
+                item3.className = 'list-group-item';
+
+                // Set its contents:
+                item3.appendChild(document.createTextNode("Fornitore: "+arrayForlist[j].nome_descrizione));
+
+                // Add it to the list:
+                list1.appendChild(item3);
+
+                // Create the list item:
+                let item4 = document.createElement('li');
+
+                item4.className = 'list-group-item';
+
+                let input = document.createElement("input");
+                input.className = "form-control";
+                input.setAttribute("type", "number");
+                input.setAttribute("name", arrayForlist[j].nome_descrizione);
+                input.setAttribute("value", arrayForlist[j].quantita);
+
+                // Set its contents:
+                item4.appendChild(input);
+
+                // Add it to the list:
+                list1.appendChild(item4);
+
+                let x = document.createElement("hr");
+                x.className = "mat-divider";
+
+                list1.appendChild(x);
+
+            }
+
+            list1.setAttribute("id",arrayForlist[0].nome_descrizione);
+            list.appendChild(list1);
+
+            let btn = document.createElement("button");
+
+            btn.className = "btn btn-success btn-block";
+
+            btn.innerHTML = "Invia Richiesta";
+
+            btn.onclick = function() {
+
+                inviaemail(arrayForlist,arrayForlist[0].nome_descrizione);
+            };
+
+            list.appendChild(btn);
+        }
+
+        // Finally, return the constructed list:
+        return list;
+    }
+
+    function inviaemail(data,id){
+        let lis = document.getElementById(id).getElementsByTagName("input");
+        for(let i=0; i<lis.length; i++){
+            data[i].quantita = lis[i].value;
+        }
+        transito(data);
+    }
+
+    function transito(data){
+        console.log(data);
+
+        let array = [];
+
+        for(let i=0; i<data.length; i++){
+
+            if(data[i].quantita!== null){
+
+                array.push(data[i]);
+
+            }
+
+        }
+
+        $.ajax({
+            url: '/getStrutturaWeb',
+            type: 'GET',
+            cache: false,
+            contentType: 'application/json',
+            success: function (data) {
+                let a = JSON.stringify(data);
+                let b = JSON.parse(a);
+
+                let dataInvioEmail={
+                    struttura: b.struttura.id,
+                    emailStruttura: b.struttura.email,
+                    array: array
+
+                };
+
+                $.ajax({
+                    url: '/invioEmailWA',
+                    type: 'POST',
+                    data: JSON.stringify(dataInvioEmail),
+                    cache: false,
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        $("#myModal1").on("show", function () {
+                            $("#myModal1 a.btn").on("click", function (e) {
+                                console.log("button pressed");
+                                $("#myModal1").modal('hide');
+                            });
+                        });
+                        $("#myModal1").on("hide", function () {
+                            $("#myModal1 a.btn").off("click");
+                        });
+
+                        $("#myModal1").on("hidden", function () {
+                            $("#myModal1").remove();
+                        });
+
+                        $("#myModal1").modal({
+                            "backdrop": "static",
+                            "keyboard": true,
+                            "show": true
+                        });
+
+                        $('#foo').empty();
+                        $('#inputGroupSelect01').val('Selezionata');
+                        $('#inputGroupSelect02').val('Selezionata');
+
+                    },
+                    faliure: function (data) {
+
+                    }
+                });
+
+
+            },
+            faliure: function (data) {
+
+            }
+        });
+
+    }
+
+    function aggiungiCategoria() {
+        let value;
+        let cliente = prompt("Inserisci la categoria:", "Tipo Categoria");
+        if (cliente === null || cliente === "") {
+            value = "Errore! Non hai inserito nessuna categoria.";
+            alert(value);
+        } else {
+            value = cliente;
+            const url = 'http://localhost:3000/getCategoria';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    value: value
+                },
+                success: function (response) {
+                    alert(value + " Inserimento eseguito con Successo!");
+                    aggiornaSelect3();
+                    aggiornaSelect1();
+                },
+                failure: function () {
+                    alert(value + " errore di inserimento!");
+                }
+            });
+        }
+    }
+
+    function salvaProdotto(){
+
+        datiInsert.codice = $('#codice').val();
+        datiInsert.descrizione = $('#descrizione').val();
+        datiInsert.categoria = $('#categoria').val();
+        datiInsert.fornitore = $('#fornitore').val();
+
+
+        $.ajax({
+            url: '/getProdotti/add',
+            type: 'POST',
+            data: JSON.stringify(datiInsert),
+            cache: false,
+            contentType: 'application/json',
+            success: function (data) {
+
+                $('#insert').hide();
+                $('.modal-backdrop').remove();
+                $('#codice').val('');
+                $('#descrizione').val('');
+                $('#categoria').val('');
+                $('#fornitore').val('');
+
+            },
+            faliure: function (data) {
+
+            }
+        });
+
+    }
+</script>
 </body>
 
 </html>

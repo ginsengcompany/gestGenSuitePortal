@@ -14,8 +14,34 @@ module.exports = function (app) {
 
     });
 
+    app.get('/administrator', function (req, res, next) {
+        res.render('admin');
+    });
+
+    app.post('/administrator', function (req, res, next) {
+
+        if (req.body.userAuthenticated && req.body.userAuthenticated === true) {
+            req.session.authenticated = true;
+            req.session.user = req.body.user;
+            res.redirect('/dashboardAdministrator');
+        }
+
+    });
+
     app.get('/dashboard', function (req, res, next) {
         res.render('index');
+    });
+
+    app.get('/dashboardAdministrator', function (req, res, next) {
+        res.render('dashboardAdministrator');
+    });
+
+    app.get('/utentiAdmin', function (req, res, next) {
+        res.render('strutture');
+    });
+
+    app.get('/strutture', function (req, res, next) {
+        res.render('struttureTab');
     });
 
     app.get('/clienti', function (req, res, next) {
@@ -51,8 +77,15 @@ module.exports = function (app) {
     });
 
     app.get('/logout', function (req, res, next) {
-        delete req.session.authenticated;
-        res.redirect('/');
+
+        if(req.query.id==='admin'){
+            delete req.session.authenticated;
+            res.redirect('/administrator');
+        }
+        else if(req.query.id==='user'){
+            delete req.session.authenticated;
+            res.redirect('/');
+        }
     });
 
 };

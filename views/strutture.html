@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="assets/css/material-dashboard.css" rel="stylesheet" />
+    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 </head>
 
@@ -33,55 +33,25 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li class="nav-item ">
-                    <a class="nav-link" href="/dashboard">
+                    <a class="nav-link" href="/dashboardAdministrator">
                         <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
+                        <p>Dashboard Admin</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/profilo">
-                        <i class="material-icons">person</i>
-                        <p>Profilo</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/utenti">
+                    <a class="nav-link" href="/strutture">
                         <i class="material-icons">content_paste</i>
-                        <p>Tabella Utenti</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/clienti">
-                        <i class="material-icons">library_books</i>
-                        <p>Tabella Clienti</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/inserimento">
-                        <i class="material-icons">border_color</i>
-                        <p>Inserimento</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/saldo">
-                        <i class="material-icons">attach_money</i>
-                        <p>Saldo</p>
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/prodotti">
-                        <i class="material-icons">restaurant_menu</i>
-                        <p>Prodotti</p>
+                        <p>Tabella Strutture</p>
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/fornitori">
-                        <i class="material-icons">transfer_within_a_station</i>
-                        <p>Tabella Fornitori</p>
+                    <a class="nav-link" href="/utentiAdmin">
+                        <i class="material-icons">content_paste</i>
+                        <p>Tabella Utenti Admin</p>
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/logout?id=user">
+                    <a class="nav-link" href="/logout?id=admin">
                         <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
                     </a>
@@ -94,7 +64,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
-                    <a class="navbar-brand" href="/fornitori">Fornitori</a>
+                    <a class="navbar-brand" href="/strutture">Tabella Strutture</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -109,22 +79,22 @@
         </nav>
         <!-- End Navbar -->
         <div class="content">
+            <!-- your content here -->
             <div class="container-fluid">
-                <!-- your content here -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-primary">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="card-title ">Tabella Utenti</h4>
-                                        <p class="card-category">Gestisci i fornitori per la Mobile Application</p>
+                                        <h4 class="card-title ">Tabella Utenti Admin</h4>
+                                        <p class="card-category">GestGenSuite MobileApp/WebApplication</p>
                                     </div>
                                     <div class="col-md-6">
                                         <div style="float: right">
-                                            <button type="button" id="aggiungiFornitore" onclick="openModalIn()" class="btn btn-primary block" data-toggle="modal" data-target="#insert" data-tooltip="tooltip" data-placement="top" title="Aggiungi Fornitore">Aggiungi <i class="fa fa-plus"></i></button>
-                                            <button type="button" id="modificaFornitore" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Fornitore">Aggiorna <i class="fa fa-pencil"></i></button>
-                                            <button type="button" id="eliminaFornitore" onclick="openModalDel()" class="btn btn-primary block" data-toggle="modal" data-target="#delete" data-tooltip="tooltip" data-placement="top" title="Elimina Fornitore">Elimina <i class="fa fa-remove"></i></button>
+                                            <button type="button" id="aggiungiUtente" onclick="openModalIn()" class="btn btn-primary block" data-toggle="modal" data-target="#insert" data-tooltip="tooltip" data-placement="top" title="Aggiungi Utente">Aggiungi <i class="fa fa-plus"></i></button>
+                                            <button type="button" id="modificaUtente" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Utente">Aggiorna <i class="fa fa-pencil"></i></button>
+                                            <button type="button" id="eliminaUtente" onclick="openModalDel()" class="btn btn-primary block" data-toggle="modal" data-target="#delete" data-tooltip="tooltip" data-placement="top" title="Elimina Utente">Elimina <i class="fa fa-remove"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -133,9 +103,13 @@
                                 <div class="table-responsive">
                                     <table id="table" class="display" style="width:100%">
                                         <thead>
-                                        <th>Nome Descrizione</th>
-                                        <th>Partita Iva</th>
-                                        <th>E mail</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Nome</th>
+                                        <th>Cognome</th>
+                                        <th>Data creazione</th>
+                                        <th>Creato da</th>
+                                        <th>Struttura</th>
                                         </thead>
                                     </table>
                                 </div>
@@ -143,12 +117,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Inserisci Fornitore</h5>
+                                <h5 class="modal-title">Inserisci Utente Admin</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -157,34 +130,47 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Nome Descrizione</label>
-                                            <input id="nomeDescrizione" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Username</label>
+                                            <input id="username1" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Partita Iva</label>
-                                            <input id="partitaIVA" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Password</label>
+                                            <input id="password1" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">E mail</label>
-                                            <input id="email" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Nome</label>
+                                            <input id="nome1" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label class="bmd-label-floating">Cognome</label>
+                                            <input id="cognome1" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect01">Struttura</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect01">
 
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                                <button type="button" class="btn btn-primary" onclick="salvaFornitore('inserimento')">Salva</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaUtente('inserimento')">Salva</button>
                             </div>
                         </div>
                     </div>
@@ -193,7 +179,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Modifica Fornitore</h5>
+                                <h5 class="modal-title">Modifica Utente</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -202,35 +188,36 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Nome Descrizione</label>
-                                            <input id="nomeDescrizione2" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Username</label>
+                                            <input id="username2" type="text" class="form-control" required>
                                             <input id="id2" type="text" class="form-control" required hidden>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">Partita Iva</label>
-                                            <input id="partitaIVA2" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Password</label>
+                                            <input id="password2" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">E mail</label>
-                                            <input id="email2" type="text" class="form-control" required>
+                                            <label class="bmd-label-floating">Nome</label>
+                                            <input id="nome2" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-
+                                            <label class="bmd-label-floating">Cognome</label>
+                                            <input id="cognome2" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                                <button type="button" class="btn btn-primary" onclick="salvaFornitore('aggiornamento')">Salva</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaUtente('aggiornamento')">Salva</button>
                             </div>
                         </div>
                     </div>
@@ -239,23 +226,22 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Elimina Fornitore</h5>
+                                <h5 class="modal-title">Elimina Utente</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <input id="id3" type="text" class="form-control" required hidden>
-                                <p>Sei sicuro di voler eliminare questo fornitore ?</p>
+                                <p>Sei sicuro di voler eliminare questo utente ?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                                <button type="button" class="btn btn-danger" onclick="salvaFornitore('eliminazione')">Elimina</button>
+                                <button type="button" class="btn btn-danger" onclick="salvaUtente('eliminazione')">Elimina</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -278,32 +264,79 @@
 <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
 <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chartist JS -->
+<script src="assets/js/plugins/chartist.min.js"></script>
 <!--  Notifications Plugin    -->
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 <script src="assets/js/plugins/DataTables.js" type="text/javascript"></script>
-<script src="assets/js/jquery.maskMoney.js"></script>
 
 <script>
+    let arrayUtenti = {};
 
-    let arrayFornitore = {};
+    function aggiornaSelect() {
+
+        let dropdown = document.getElementById('inputGroupSelect01');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Selezionare Struttura';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = 'http://localhost:3000/strutturaAdmin';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].nome;
+                    option.value = data["data"][i].id;
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('Errore nella richiesta!');
+        };
+
+        request.send();
+    }
 
     $(document).ready(function () {
+
+        aggiornaSelect();
 
         $('#modificaUtente').prop('disabled', true);
         $('#eliminaUtente').prop('disabled', true);
 
         table = $('#table').DataTable({
-            ajax: "/getFornitoreWA",
+            ajax: "/utentiStrutturaAdmin",
             ajaxSettings: {
                 method: "GET",
                 cache: false
             },
             columns: [
-                {"data": "nome_descrizione"},
-                {"data": "piva"},
-                {"data": "email"}
+                {"data": "username"},
+                {"data": "password"},
+                {"data": "nome_auth"},
+                {"data": "cognome"},
+                {"data": "create_date","render": function (data) {
+                    function pad(s) { return (s < 10) ? '0' + s : s; };
+                    let d = new Date(data);
+                    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+                }},
+                {"data": "create_user"},
+                {"data": "nome_struttura"},
             ],
             responsive: {
                 details: {
@@ -322,14 +355,14 @@
         $('#table tbody').on('click', 'tr', function () {
             if ($(this).hasClass('selected')) {
                 $(this).removeClass('selected');
-                $('#modificaFornitore').prop('disabled', true);
-                $('#eliminaFornitore').prop('disabled', true);
+                $('#modificaUtente').prop('disabled', true);
+                $('#eliminaUtente').prop('disabled', true);
             }
             else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-                $('#modificaFornitore').prop('disabled', false);
-                $('#eliminaFornitore').prop('disabled', false);
+                $('#modificaUtente').prop('disabled', false);
+                $('#eliminaUtente').prop('disabled', false);
             }
         });
 
@@ -352,6 +385,7 @@
 
     function openModalIn(){
 
+
     }
 
     function openModalUp(){
@@ -359,14 +393,14 @@
         let ids1 = $.map(table.rows('.selected').data(), function (item) {
             return item;
         });
-        arrayFornitore = ids1;
+        arrayUtenti = ids1;
 
-        console.log(ids1);
+        $('#username2').val(arrayUtenti[0].username);
+        $('#password2').val(arrayUtenti[0].password);
+        $('#nome2').val(arrayUtenti[0].nome_auth);
+        $('#cognome2').val(arrayUtenti[0].cognome);
+        $('#id2').val(arrayUtenti[0].id_auth);
 
-        $('#nomeDescrizione2').val(arrayFornitore[0].nome_descrizione);
-        $('#email2').val(arrayFornitore[0].email);
-        $('#partitaIVA2').val(arrayFornitore[0].piva);
-        $('#id2').val(arrayFornitore[0].id);
     }
 
     function openModalDel(){
@@ -374,29 +408,33 @@
         let ids1 = $.map(table.rows('.selected').data(), function (item) {
             return item;
         });
-        arrayFornitore = ids1;
+        arrayUtenti = ids1;
 
-        $('#id3').val(arrayFornitore[0].id);
+        $('#id3').val(arrayUtenti[0].id_auth);
+
     }
 
-    function salvaFornitore(tipo){
+    function salvaUtente(tipo){
 
         let datiInsert = {
-            "id": '',
-            "nome_descrizione": '',
-            "piva": '',
-            "email": '',
-            "struttura": ''
+            "username": "",
+            "password": "",
+            "nome": "",
+            "cognome": "",
+            "id": "",
+            "struttura":""
         };
 
         if(tipo === 'inserimento'){
 
-            datiInsert.nome_descrizione = $('#nomeDescrizione').val();
-            datiInsert.piva = $('#partitaIVA').val();
-            datiInsert.email = $('#email').val();
+            datiInsert.username = $('#username1').val();
+            datiInsert.password = $('#password1').val();
+            datiInsert.nome = $('#nome1').val();
+            datiInsert.cognome = $('#cognome1').val();
+            datiInsert.struttura = $('#inputGroupSelect01').val();
 
             $.ajax({
-                url: '/getFornitoreWA',
+                url: '/utentiStrutturaAdmin',
                 type: 'POST',
                 cache: false,
                 contentType: 'application/json',
@@ -408,34 +446,43 @@
                         $('#insert').hide();
                         $('.modal-backdrop').remove();
                         table.ajax.reload();
-                        $('#nomeDescrizione').val('');
-                        $('#partitaIVA').val('');
-                        $('#email').val('');
+                        $('#username1').val('');
+                        $('#password1').val('');
+                        $('#nome1').val('');
+                        $('#cognome1').val('');
+
                     }
                     else if(data===true){
 
+
+
+
                     }
+
                 },
                 faliure: function(data) {
 
                 }
             });
+
         }
 
         if(tipo === 'aggiornamento'){
 
-            datiInsert.nome_descrizione = $('#nomeDescrizione2').val();
-            datiInsert.piva = $('#partitaIVA2').val();
-            datiInsert.email = $('#email2').val();
+            datiInsert.username = $('#username2').val();
+            datiInsert.password = $('#password2').val();
+            datiInsert.nome = $('#nome2').val();
+            datiInsert.cognome = $('#cognome2').val();
             datiInsert.id = $('#id2').val();
 
             $.ajax({
-                url: '/getFornitoreWA/'+datiInsert.id,
+                url: '/utentiStrutturaAdmin/'+datiInsert.id,
                 type: 'PUT',
                 data: JSON.stringify(datiInsert),
                 cache: false,
                 contentType: 'application/json',
                 success: function(data) {
+
                     if(data===true){
 
 
@@ -446,9 +493,10 @@
                         $('#update').hide();
                         $('.modal-backdrop').remove();
                         table.ajax.reload();
-                        $('#nomeDescrizione2').val('');
-                        $('#partitaIVA2').val('');
-                        $('#email2').val('');
+                        $('#username2').val('');
+                        $('#password2').val('');
+                        $('#nome2').val('');
+                        $('#cognome2').val('');
                         $('#id2').val('');
 
                     }
@@ -466,7 +514,7 @@
             datiInsert.id = $('#id3').val();
 
             $.ajax({
-                url: '/getFornitoreWA/'+datiInsert.id,
+                url: '/utentiStrutturaAdmin/'+datiInsert.id,
                 type: 'DELETE',
                 data: JSON.stringify(datiInsert),
                 cache: false,
@@ -483,7 +531,7 @@
                         $('#delete').hide();
                         $('.modal-backdrop').remove();
                         table.ajax.reload();
-                        $('#id3').val();
+                        $('#id3').val('');
 
                     }
 
@@ -498,7 +546,6 @@
 
 
 </script>
-
 
 </body>
 

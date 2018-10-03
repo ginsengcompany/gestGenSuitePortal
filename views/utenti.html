@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="/logout?id=user">
                         <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
                     </a>
@@ -258,6 +258,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="myModal1">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <!-- dialog body-->
+                            <div class="modal-body">
+                                <button class="close" type="button" data-dismiss="modal">×</button>
+                                <h3>Errore nell'aggiornamento! provare con un'altro username.</h3>
+                            </div>
+                            <!-- dialog buttons-->
+                            <div class="modal-footer"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -428,6 +441,25 @@
                     else if(data===true){
 
 
+                        $("#myModal1").on("show", function () {
+                            $("#myModal1 a.btn").on("click", function (e) {
+                                console.log("button pressed");
+                                $("#myModal1").modal('hide');
+                            });
+                        });
+                        $("#myModal1").on("hide", function () {
+                            $("#myModal1 a.btn").off("click");
+                        });
+
+                        $("#myModal1").on("hidden", function () {
+                            $("#myModal1").remove();
+                        });
+
+                        $("#myModal1").modal({
+                            "backdrop": "static",
+                            "keyboard": true,
+                            "show": true
+                        });
 
 
                     }
@@ -458,6 +490,25 @@
 
                     if(data===true){
 
+                        $("#myModal1").on("show", function () {
+                            $("#myModal1 a.btn").on("click", function (e) {
+                                console.log("button pressed");
+                                $("#myModal1").modal('hide');
+                            });
+                        });
+                        $("#myModal1").on("hide", function () {
+                            $("#myModal1 a.btn").off("click");
+                        });
+
+                        $("#myModal1").on("hidden", function () {
+                            $("#myModal1").remove();
+                        });
+
+                        $("#myModal1").modal({
+                            "backdrop": "static",
+                            "keyboard": true,
+                            "show": true
+                        });
 
                     }
 
@@ -496,6 +547,25 @@
 
                     if(data===true){
 
+                        $("#myModal1").on("show", function () {
+                            $("#myModal1 a.btn").on("click", function (e) {
+                                console.log("button pressed");
+                                $("#myModal1").modal('hide');
+                            });
+                        });
+                        $("#myModal1").on("hide", function () {
+                            $("#myModal1 a.btn").off("click");
+                        });
+
+                        $("#myModal1").on("hidden", function () {
+                            $("#myModal1").remove();
+                        });
+
+                        $("#myModal1").modal({
+                            "backdrop": "static",
+                            "keyboard": true,
+                            "show": true
+                        });
 
                     }
 

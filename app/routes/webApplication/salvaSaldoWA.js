@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
     let modalita = datiInsert.modalita;
     let cliente = datiInsert.cliente;
     let importo = datiInsert.importo;
-    let foto = undefined;
+    let foto = datiInsert.foto;
     let utente = user.username;
     let struttura = user.struttura;
     let descrizione = datiInsert.descrizione;
@@ -25,7 +25,6 @@ router.post('/', function(req, res, next) {
     let client = connectionPostgres();
 
     let queryPostSaldo = "INSERT INTO tb_saldo" +
-        //"(data, tipo, modalita, cliente, importo, utente, struttura, descrizione)" +
         "(data, tipo, modalita, cliente, importo, foto, utente, struttura, descrizione) " +
         "VALUES (" +
         "'" + data +"', " +

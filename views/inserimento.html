@@ -2,18 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         GestGenSuite
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- CSS Files -->
-    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet"/>
 </head>
 
 <body class="" onload="aggiornaSelect()">
@@ -26,8 +28,8 @@
       -->
         <div class="logo">
             <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            GestGenSuite <img src="images/logo.png" height="100px" >
-        </a>
+                GestGenSuite <img src="images/logo.png" height="100px">
+            </a>
 
         </div>
         <div class="sidebar-wrapper">
@@ -81,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/logout">
+                    <a class="nav-link" href="/logout?id=user">
                         <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
                     </a>
@@ -96,7 +98,8 @@
                 <div class="navbar-wrapper">
                     <a class="navbar-brand" href="/inserimento">Inserimento</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="navbar-toggler-icon icon-bar"></span>
                     <span class="navbar-toggler-icon icon-bar"></span>
@@ -120,94 +123,106 @@
                                 <p class="card-category">Inserisci i dati per il tuo saldo</p>
                             </div>
                             <div class="card-body">
-                                <form id="inserimentoForm">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating" for="tipo">Seleziona tipo:</label>
-                                                <select class="form-control" id="tipo" placeholder="Seleziona" required>
-                                                    <option value="" disabled selected>Seleziona</option>
-                                                    <option value="incasso">INCASSO</option>
-                                                    <option value="pagamento">PAGAMENTO</option>
-                                                    <option value="sospeso">SOSPESO</option>
-                                                </select>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="tipo">Seleziona tipo:</label>
+                                            <select class="form-control" id="tipo" placeholder="Seleziona" required>
+                                                <option value="" disabled selected>Seleziona</option>
+                                                <option value="incasso">INCASSO</option>
+                                                <option value="pagamento">PAGAMENTO</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating" for="modalita">Modalità</label>
-                                                <select class="form-control" id="modalita" placeholder="Seleziona" required>
-                                                    <option value="" disabled selected>Seleziona</option>
-                                                    <option value="bonifico">BONIFICO</option>
-                                                    <option value="carta">CARTA DI CREDITO</option>
-                                                    <option value="contanti">CONTANTI</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="modalita">Modalità</label>
+                                            <select class="form-control" id="modalita" placeholder="Seleziona" required>
+                                                <option value="" disabled selected>Seleziona</option>
+                                                <option value="bonifico">BONIFICO</option>
+                                                <option value="carta">CARTA DI CREDITO</option>
+                                                <option value="contanti">CONTANTI</option>
+                                                <option value="sospeso">SOSPESO</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating" for="cliente">Cliente</label>
-                                                <select class="form-control" id="cliente" placeholder="Seleziona" required>
-                                                    <!-- fine div Va riempito con una get su cliente  -->
-                                                </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="cliente">Cliente</label>
+                                            <select class="form-control" id="cliente" placeholder="Seleziona" required>
+                                                <!-- fine div Va riempito con una get su cliente  -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <button class="btn btn-primary" onclick="aggiungiCliente()">Aggiungi cliente
+                                                <i class="icon-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="descrizione">Descrizione</label>
+                                            <input id="descrizione" class="form-control"
+                                                   placeholder="Inserire Descrizione" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="z-index: 2;position: relative">
+                                        <div class="form-group bmd-form-group">
+                                            <label for="datepicker">Selezionare data</label>
+                                            <input class="form-control" type="text" id="datepicker" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <label for="importo">Inserire importo</label>
+                                            <input class="form-control" type="text" id="importo" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <button class="btn btn-primary" disabled>Scatta foto</button>
+                                            <!-- fine div Va fatto un metodo (click)="takePhoto()"  -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Aggiungi Foto</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inp">
+                                                <label class="custom-file-label" for="inp">Scegli File</label>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn" onclick="aggiungiCliente()">Aggiungi cliente <i class="icon-right"></i></button>
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Anteprima</label>
+                                            <img id="img" height="150">
                                         </div>
                                     </div>
+                                </div>
 
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <label class="bmd-label-floating" for="descrizione">Descrizione</label>
-                                                <input id="descrizione"  class="form-control" placeholder="Inserire Descrizione" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4"  style="z-index: 2;position: relative">
-                                            <div class="form-group bmd-form-group">
-                                                <label for="datepicker">Selezionare data</label>
-                                                <input class="form-control" type="text" id="datepicker" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <label for="importo">Inserire importo</label>
-                                                <input class="form-control" type="text" id="importo" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn" disabled>Scatta foto</button>
-                                                <!-- fine div Va fatto un metodo (click)="takePhoto()"  -->
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group bmd-form-group">
-                                                <button class="btn lt-register-btn" disabled>Aggiungi foto</button>
-                                                <!-- fine div Va fatto un metodo (click)="takePhoto()"  -->
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button class="btn lt-register-btn" onclick="salvaSaldoWA()">Submit</button>
-
-                                </form>
+                                <button class="btn btn-primary" onclick="salvaSaldoWA()">Salva</button>
                             </div>
                         </div>
                     </div>
@@ -221,7 +236,8 @@
                     &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, powered by
+                    </script>
+                    , powered by
                     <a href="http://www.ak12srl.it" target="_blank">Ak-12 S.r.l.</a>
                 </div>
                 <!-- your footer here -->
@@ -294,7 +310,7 @@
             const url = 'http://localhost:3000/clienteStruttura';
             $.ajax({
                 url: url,
-                type: 'PUT',   //type is any HTTP method
+                type: 'POST',   //type is any HTTP method
                 data: {
                     value: value
                 },
@@ -312,55 +328,80 @@
 
 <script>
     function salvaSaldoWA() {
-        const url =  'http://localhost:3000/salvaSaldoWA';
 
-        let gg = document.getElementById("datepicker").value.substring(3,5);
-        let mm = document.getElementById("datepicker").value.substring(0,2);
-        let yy = document.getElementById("datepicker").value.substring(6,10);
-        var imp = $('#importo').maskMoney('unmasked')[0];
+        let gg = document.getElementById("datepicker").value.substring(3, 5);
+        let mm = document.getElementById("datepicker").value.substring(0, 2);
+        let yy = document.getElementById("datepicker").value.substring(6, 10);
+        let imp = $('#importo').maskMoney('unmasked')[0];
 
         let datiSaldo = {
             tipo: document.getElementById("tipo").value,
             modalita: document.getElementById("modalita").value,
             cliente: document.getElementById("cliente").value,
             descrizione: document.getElementById("descrizione").value,
-            data: yy+'-'+mm+'-'+gg,
-            importo: imp
-            //foto: ''
+            data: yy + '-' + mm + '-' + gg,
+            importo: imp,
+            foto: $('#img').attr("src")
         };
 
         console.log(datiSaldo);
 
         $.ajax({
-            url: url,
-            type: 'POST',   //type is any HTTP method
+            url: '/salvaSaldoWA',
+            type: 'POST',
             data: {
                 data: datiSaldo
             },
             success: function (response) {
-                alert(datiSaldo + " inserito!");
+                alert("Inserimento eseguito con Successo!");
                 console.log(response);
+                $('#tipo').val('');
+                $('#modalita').val('');
+                $('#cliente').val('');
+                $('#descrizione').val('');
+                $('#datepicker').val('');
+                $('#importo').val('');
+                $('#img').attr("src","");
             },
             failure: function () {
-                alert(datiSaldo + " errore di inserimento!");
+                alert("Errore di inserimento!");
             }
         });
     }
 </script>
 
 <script>
-    $( function() {
+    $(function () {
         $("#datepicker").datepicker({
-            onSelect: function() {
+            onSelect: function () {
                 let dateObject = $(this).datepicker('getDate');
             }
         });
     });
 </script>
 
+<script>
+    function readFile() {
+
+        if (this.files && this.files[0]) {
+
+            var FR = new FileReader();
+
+            FR.addEventListener("load", function (e) {
+                document.getElementById("img").src = e.target.result;
+            });
+
+            FR.readAsDataURL(this.files[0]);
+        }
+
+    }
+
+    document.getElementById("inp").addEventListener("change", readFile);
+</script>
+
 <script type="text/javascript">
     // suffix: ' €'
-    $("#importo").maskMoney({thousands:',', decimal:'.', allowZero: true, suffix: ''});
+    $("#importo").maskMoney({thousands: ',', decimal: '.', allowZero: true, suffix: ''});
 </script>
 
 </body>
