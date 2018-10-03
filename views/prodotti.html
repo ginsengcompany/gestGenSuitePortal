@@ -286,7 +286,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/getFornitoreWA';
+        const url = '/getFornitoreWA';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -326,7 +326,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/getCategoria';
+        const url = '/getCategoria';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -366,7 +366,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/getFornitoreWA';
+        const url = '/getFornitoreWA';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -406,7 +406,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/getCategoria';
+        const url = '/getCategoria';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -893,7 +893,7 @@
             alert(value);
         } else {
             value = cliente;
-            const url = 'http://localhost:3000/getCategoria';
+            const url = '/getCategoria';
             $.ajax({
                 url: url,
                 type: 'POST',

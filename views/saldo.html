@@ -254,7 +254,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/clienteStruttura';
+        const url = '/clienteStruttura';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -313,7 +313,7 @@
 
         let tipo = '';
 
-        const url =  'http://localhost:3000/getSaldoWA';
+        const url =  '/getSaldoWA';
 
         let datiSaldo = {
             tipo: '',
@@ -441,7 +441,7 @@
 </script>
 
 <script>
-    const url =  'http://localhost:3000/getSaldoWA';
+    const url =  '/getSaldoWA';
     function gestisciTabella(datiSaldo) {
         $(document).ready(function () {
             table = $('#table').DataTable({

@@ -269,7 +269,7 @@
         dropdown.add(defaultOption);
         dropdown.selectedIndex = 0;
 
-        const url = 'http://localhost:3000/clienteStruttura';
+        const url = '/clienteStruttura';
 
         const request = new XMLHttpRequest();
         request.open('GET', url, true);
@@ -307,7 +307,7 @@
             alert(value);
         } else {
             value = cliente;
-            const url = 'http://localhost:3000/clienteStruttura';
+            const url = '/clienteStruttura';
             $.ajax({
                 url: url,
                 type: 'POST',   //type is any HTTP method
