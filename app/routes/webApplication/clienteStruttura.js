@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
     let client = connectionPostgres();
 
-    let queryClienti = "SELECT * FROM tb_cliente WHERE struttura = " + user.struttura;
+    let queryClienti = "SELECT * FROM tb_cliente WHERE struttura = " + user.struttura +" order by text";
 
 
     const query = client.query(queryClienti);

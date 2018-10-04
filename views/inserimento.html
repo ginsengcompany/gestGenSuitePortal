@@ -16,6 +16,17 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- CSS Files -->
     <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet"/>
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            border: 1px solid #d3ff72;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body class="" onload="aggiornaSelect()">
@@ -80,6 +91,12 @@
                     <a class="nav-link" href="/fornitori">
                         <i class="material-icons">transfer_within_a_station</i>
                         <p>Tabella Fornitori</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/richieste">
+                        <i class="material-icons">add_shopping_cart</i>
+                        <p>Tabella Riassortimento</p>
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -178,13 +195,13 @@
                                     <div class="col-md-4" style="z-index: 2;position: relative">
                                         <div class="form-group bmd-form-group">
                                             <label for="datepicker">Selezionare data</label>
-                                            <input class="form-control" type="text" id="datepicker" required>
+                                            <input class="form-control" type="text" id="datepicker" placeholder="data" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group bmd-form-group">
                                             <label for="importo">Inserire importo</label>
-                                            <input class="form-control" type="text" id="importo" required>
+                                            <input class="form-control" type="text" id="importo" placeholder="importo"  required>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +225,7 @@
                                             </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inp">
-                                                <label class="custom-file-label" for="inp">Scegli File</label>
+                                                <label  class="custom-file-upload" for="inp">Scegli File</label>
                                             </div>
                                         </div>
                                     </div>

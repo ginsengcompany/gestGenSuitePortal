@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        GestGenSuite
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <style>
+        tr.group,
+        tr.group:hover {
+            background: linear-gradient(60deg, #86ca00, #d3ff72);
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body class="">
+<div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+        <!--
+          Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+          Tip 2: you can also add an image using data-image tag
+      -->
+        <div class="logo">
+            <a class="simple-text logo-normal">
+                GestGenSuite <img src="images/logo.png" height="100px" >
+            </a>
+
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/dashboard">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/profilo">
+                        <i class="material-icons">person</i>
+                        <p>Profilo</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/utenti">
+                        <i class="material-icons">content_paste</i>
+                        <p>Tabella Utenti</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/clienti">
+                        <i class="material-icons">library_books</i>
+                        <p>Tabella Clienti</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/inserimento">
+                        <i class="material-icons">border_color</i>
+                        <p>Inserimento</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/saldo">
+                        <i class="material-icons">attach_money</i>
+                        <p>Saldo</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/prodottiStruttura">
+                        <i class="material-icons">restaurant_menu</i>
+                        <p>Prodotti</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/fornitori">
+                        <i class="material-icons">transfer_within_a_station</i>
+                        <p>Tabella Fornitori</p>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/richieste">
+                        <i class="material-icons">add_shopping_cart</i>
+                        <p>Tabella Riassortimento</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/logout">
+                        <i class="material-icons">exit_to_app</i>
+                        <p>Logout</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <a class="navbar-brand" href="/richieste">Tabella Riassortimento</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end">
+
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Tabella Riassortimento</h4>
+                                <p class="card-category">Visualizzi le richieste inoltrate ai fornitori</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="inputGroupSelect02">Fornitore</label>
+                                            </div>
+                                            <select class="custom-select" id="inputGroupSelect02" onchange="aggiornaLista()">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="table" class="display" style="width:100%">
+                                    <thead>
+                                    <th>Fornitore</th>
+                                    <th>Email Fornitore</th>
+                                    <th>Codice Prodotto</th>
+                                    <th>Descrizione Prodotto</th>
+                                    <th>Quantità</th>
+                                    <th>Data </th>
+                                    <th>Richiesto da</th>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="copyright float-right">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>, powered by
+                    <a href="http://www.ak12srl.it" target="_blank">Ak-12 S.r.l.</a>
+                </div>
+                <!-- your footer here -->
+            </div>
+        </footer>
+    </div>
+</div>
+<!--   Core JS Files   -->
+<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+<script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chartist JS -->
+<script src="assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<script src="assets/js/plugins/DataTables.js" type="text/javascript"></script>
+
+
+<script>
+    function aggiornaSelect() {
+
+        let dropdown = document.getElementById('inputGroupSelect02');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = '/getFornitoreWA';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].nome_descrizione;
+                    option.value = data["data"][i].id;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+
+    aggiornaSelect();
+
+    function aggiornaLista() {
+
+        let value = $('#inputGroupSelect02').val();
+
+        if(value === "Seleziona"){
+            $('#table').dataTable().fnDestroy();
+            $('#table').dataTable().fnClearTable();
+        }
+        else{
+            $('#table').dataTable().fnDestroy();
+            table = $('#table').DataTable({
+                ajax: "/richiesteWA/"+value,
+                ajaxSettings: {
+                    method: "GET",
+                    cache: false
+                },
+                columns: [
+                    {"data": "nome_descrizione"},
+                    {"data": "email"},
+                    {"data": "codice"},
+                    {"data": "descrizione_prodotto"},
+                    {"data": "quantita"},
+                    {"data": "data","render": function (data) {
+                        function pad(s) { return (s < 10) ? '0' + s : s; };
+                        let d = new Date(data);
+                        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/') +" "+ d.getHours() + ":"+d.getMinutes() + ":"+d.getSeconds();
+                    }},
+                    {"data": "username"}
+                ],
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: 0
+                }],
+                order: [5, 'desc'],
+                drawCallback: function ( settings ) {
+                    let api = this.api();
+                    let rows = api.rows( {page:'current'} ).nodes();
+
+                    let last=null;
+
+                    let groupadmin = [];
+
+                    function renderDate(data) {
+                        function pad(s) { return (s < 10) ? '0' + s : s; };
+                        let d = new Date(data);
+                        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+                    }
+
+                    function formatDate(date) {
+                        let monthNames = [
+                            "Gennaio", "Febbraio", "Marzo",
+                            "Aprile", "Maggio", "Giugno", "Luglio",
+                            "Agosto", "Settembre", "Ottobre",
+                            "Novembre", "Dicembre"
+                        ];
+
+                        let a = new Date(date);
+
+                        let day = a.getDate();
+                        let monthIndex = a.getMonth();
+                        let year = a.getFullYear();
+
+                        return day + ' ' + monthNames[monthIndex] + ' ' + year;
+                    }
+
+                    api.column(5, {page:'current'} ).data().each( function ( group, i ) {
+
+                        if ( last !== renderDate(group) ) {
+
+                            $(rows).eq( i ).before(
+                                '<tr class="group" id="'+i+'"><td colspan="12">'+formatDate(group)+'</td></tr>'
+                            );
+                            groupadmin.push(i);
+                            last = renderDate(group);
+                        }
+                    } );
+
+                    for( let k=0; k < groupadmin.length; k++){
+                        // Code added for adding class to sibling elements as "group_<id>"
+                        $("#"+groupadmin[k]).nextUntil("#"+groupadmin[k+1]).addClass(' group_'+groupadmin[k]);
+                        $(".group_"+groupadmin[k]).slideToggle(400);
+                        // Code added for adding Toggle functionality for each group
+
+                        $("#"+groupadmin[k]).click(function(){
+                            let gid = $(this).attr("id");
+                            $(".group_"+gid).slideToggle(300);
+                        });
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    $(document).ready(function () {
+
+        $.fn.dataTable.ext.errMode = 'none';
+        table = $('#table').DataTable();
+        $('#table').dataTable().fnDestroy();
+        $('#table').dataTable().fnClearTable();
+
+    });
+</script>
+
+</body>
+
+</html>

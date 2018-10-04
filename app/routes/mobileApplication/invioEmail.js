@@ -4,6 +4,8 @@ let postgresConnection = require('../../../config/postgres');
 let moment = require('moment');
 let nodemailer = require('nodemailer');
 
+moment.locale('it');
+
 
 let connectionPostgres = function () {
     return postgresConnection();
@@ -73,7 +75,7 @@ router.post('/', function(req, res, next) {
                     "'" + fornitore  +"', " +
                     "'" + datiInsert.array[i].codice      +"', " +
                     "'" + datiInsert.array[i].descrizione     +"', " +
-                    "'" + moment().format()    +"', " +
+                    "'" + moment().format('MMMM Do YYYY, h:mm:ss a')    +"', " +
                     "'" + datiInsert.array[i].quantita      +"', " +
                     "'" + user_admin   +"')";
 

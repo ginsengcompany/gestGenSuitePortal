@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="/prodotti">
+                    <a class="nav-link" href="/prodottiStruttura">
                         <i class="material-icons">restaurant_menu</i>
                         <p>Prodotti</p>
                     </a>
@@ -79,6 +79,12 @@
                     <a class="nav-link" href="/fornitori">
                         <i class="material-icons">transfer_within_a_station</i>
                         <p>Tabella Fornitori</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/richieste">
+                        <i class="material-icons">add_shopping_cart</i>
+                        <p>Tabella Riassortimento</p>
                     </a>
                 </li>
                 <li class="nav-item ">
@@ -119,8 +125,18 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title ">Saldo</h4>
-                                    <p class="card-category">Visualizza il tuo saldo</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="card-title ">Saldo</h4>
+                                            <p class="card-category">Visualizza il tuo saldo</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div style="float: right">
+                                                <button type="button" id="modificaSaldo" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Saldo">Modifica <i class="fa fa-pencil"></i></button>
+                                                <button type="button" id="eliminaSaldo" onclick="openModalDel()" class="btn btn-primary block" data-toggle="modal" data-target="#delete" data-tooltip="tooltip" data-placement="top" title="Elimina Saldo">Elimina <i class="fa fa-remove"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="card-body">
@@ -201,6 +217,7 @@
                                                     <th>Modalita</th>
                                                     <th>Tipo</th>
                                                     <th>Creato da</th>
+                                                    <th>Foto</th>
                                                     </thead>
                                                 </table>
                                             </div>
@@ -212,7 +229,114 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Foto Documento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="img" class="img-fluid" alt="Responsive image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bd-example-modal-lg" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modifica Saldo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="clienteUp">Cliente</label>
+                                            <select class="form-control" id="clienteUp" placeholder="Seleziona" >
+                                                <!-- fine div Va riempito con una get su cliente  -->
+                                            </select>
+                                        </div>
+                                        <input id="id2" type="text" class="form-control" required hidden>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <button class="btn btn-primary" onclick="aggiungiCliente()">Aggiungi cliente
+                                                <i class="icon-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="descrizione">Descrizione</label>
+                                            <input id="descrizione" class="form-control" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label for="importo">Inserire importo</label>
+                                            <input class="form-control" type="text" id="importo"  >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="modalita">Modalità</label>
+                                            <select class="form-control" id="modalita" placeholder="Seleziona" >
+                                                <option value="" disabled selected>Seleziona</option>
+                                                <option value="bonifico">BONIFICO</option>
+                                                <option value="carta">CARTA DI CREDITO</option>
+                                                <option value="contanti">CONTANTI</option>
+                                                <option value="sospeso">SOSPESO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating" for="tipoUp">Seleziona tipo:</label>
+                                            <select class="form-control" id="tipoUp" placeholder="Seleziona" >
+                                                <option value="" disabled selected>Seleziona</option>
+                                                <option value="incasso">INCASSO</option>
+                                                <option value="pagamento">PAGAMENTO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-primary" onclick="salvaUtente('aggiornamento')">Salva</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Elimina Utente</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input id="id3" type="text" class="form-control" required hidden>
+                                <p>Sei sicuro di voler eliminare questo saldo ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                                <button type="button" class="btn btn-danger" onclick="salvaUtente('eliminazione')">Elimina</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -242,6 +366,8 @@
 <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="assets/js/plugins/DataTables.js" type="text/javascript"></script>
+<script src="assets/js/jquery.maskMoney.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
     function aggiornaSelect() {
@@ -396,8 +522,6 @@
                     let uscita = parseFloat('0.00')
                     for (var i = 0; i < data.data.length; i++) {
                         if(data.data[i].tipo === 'incasso'){
-                            console.log(parseFloat(data.data[i].importo));
-                            console.log(data.data[i].importo);
                             entrata = parseFloat(entrata) + parseFloat(data.data[i].importo);
                         }else if (data.data[i].tipo === 'pagamento'){
                             uscita = parseFloat(uscita) + parseFloat(data.data[i].importo);
@@ -406,6 +530,16 @@
                     $('#entrate').text(entrata);
                     $('#uscite').text(uscita);
                     $('#saldo').text(entrata - uscita);
+
+                    let totale = entrata - uscita;
+
+                    if(totale>0){
+                        $('#saldo').css("color","green");
+                    }
+                    if(totale<0){
+                        $('#saldo').css("color","red");
+                    }
+
                     table.destroy();
                     gestisciTabella(data);
                 }
@@ -421,8 +555,6 @@
 <script>
     function saldoGiornata(){
 
-        console.log($('#tipo').val());
-
         if($('#tipo').val()=== 'giornata'){
             richiediSaldo();
         }
@@ -432,8 +564,6 @@
 <script>
     function saldoPeriodo(){
 
-        console.log($('#tipo').val());
-
         if($('#tipo').val()=== 'periodo'){
             richiediSaldo();
         }
@@ -441,7 +571,36 @@
 </script>
 
 <script>
-    const url =  '/getSaldoWA';
+
+    $('#modificaSaldo').prop('disabled', true);
+    $('#eliminaSaldo').prop('disabled', true);
+
+    $("#importo").maskMoney({thousands: ',', decimal: '.', allowZero: true, suffix: ''});
+
+    let something = (function() {
+        let executed = false;
+        return function() {
+            if (!executed) {
+                executed = true;
+                $('#table tbody').on('click', 'tr', function () {
+                    let data = table.row(this).data();
+                    $('#img').attr('src',data.foto);
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                        $('#modificaSaldo').prop('disabled', true);
+                        $('#eliminaSaldo').prop('disabled', true);
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                        $('#modificaSaldo').prop('disabled', false);
+                        $('#eliminaSaldo').prop('disabled', false);
+                    }
+                });
+            }
+        };
+    })();
+
     function gestisciTabella(datiSaldo) {
         $(document).ready(function () {
             table = $('#table').DataTable({
@@ -452,7 +611,19 @@
                     {"data": "importo"},
                     {"data": "modalita"},
                     {"data": "tipo"},
-                    {"data": "utente"}
+                    {"data": "utente"},
+                    {"data": "foto", "render": function(data) {
+
+                            if(data === 'undefined' || data === 'null' || data === undefined || data === null){
+
+                                return ''
+
+                            }
+                            else{
+
+                                return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Vedi Foto</button>'
+                            }
+                    }}
                 ],
                 responsive: {
                     details: {
@@ -467,7 +638,77 @@
                 }],
                 order: [1, 'asc']
             });
+
+            something();
+
         });
+
+    }
+
+    function aggiornaSelect1() {
+
+        let dropdown = document.getElementById('clienteUp');
+        dropdown.length = 0;
+
+        let defaultOption = document.createElement('option');
+        defaultOption.text = 'Seleziona';
+        dropdown.add(defaultOption);
+        dropdown.selectedIndex = 0;
+
+        const url = '/clienteStruttura';
+
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+
+        request.onload = function () {
+            if (request.status === 200) {
+                const data = JSON.parse(request.responseText);
+                let option;
+                for (let i = 0; i < data["data"].length; i++) {
+                    option = document.createElement('option');
+                    option.text = data["data"][i].text;
+                    option.value = data["data"][i].value;
+
+                    dropdown.add(option);
+                }
+            } else {
+                // Reached the server, but it returned an error
+            }
+        };
+
+        request.onerror = function () {
+            console.error('An error occurred fetching the JSON from ' + url);
+        };
+
+        request.send();
+    }
+    aggiornaSelect1();
+
+    function aggiungiCliente() {
+        let value;
+        let cliente = prompt("Inserisci il cliente:", "Tipo Cliente");
+        if (cliente === null || cliente === "") {
+            value = "Errore! Non hai inserito nessuna descrizione cliente.";
+            alert(value);
+        } else {
+            value = cliente;
+            const url = '/clienteStruttura';
+            $.ajax({
+                url: url,
+                type: 'POST',   //type is any HTTP method
+                data: {
+                    value: value
+                },
+                success: function (response) {
+                    alert(value + " inserito!");
+                    aggiornaSelect();
+                    aggiornaSelect1();
+                },
+                failure: function () {
+                    alert(value + " errore di inserimento!");
+                }
+            });
+        }
     }
 </script>
 
@@ -500,6 +741,131 @@
             return date;
         }
     });
+</script>
+
+<script>
+
+    let arraySaldo = {};
+
+    function openModalUp(){
+
+        let ids1 = $.map(table.rows('.selected').data(), function (item) {
+            return item;
+        });
+        arraySaldo = ids1;
+
+        console.log(arraySaldo);
+
+        $('#clienteUp').val(arraySaldo[0].cliente);
+        $('#descrizione').val(arraySaldo[0].descrizione);
+        $('#importo').val(arraySaldo[0].importo);
+        $('#modalita').val(arraySaldo[0].modalita);
+        $('#tipoUp').val(arraySaldo[0].tipo);
+        $('#id2').val(arraySaldo[0].id);
+
+    }
+
+    function openModalDel(){
+
+        let ids1 = $.map(table.rows('.selected').data(), function (item) {
+            return item;
+        });
+        arraySaldo = ids1;
+
+        $('#id3').val(arraySaldo[0].id);
+
+    }
+
+    function salvaUtente(tipo){
+
+        let datiInsert = {
+            "clienteUp": '',
+            "descrizione": '',
+            "importo": '',
+            "modalita": '',
+            "tipoUp": '',
+            "id": ''
+        };
+
+        if(tipo === 'aggiornamento'){
+
+            datiInsert.clienteUp = $('#clienteUp').val();
+            datiInsert.descrizione = $('#descrizione').val();
+            datiInsert.importo = $('#importo').val();
+            datiInsert.modalita = $('#modalita').val();
+            datiInsert.tipoUp = $('#tipoUp').val();
+            datiInsert.id = $('#id2').val();
+
+            $.ajax({
+                url: '/salvaSaldoWA/'+datiInsert.id,
+                type: 'PUT',
+                data: JSON.stringify(datiInsert),
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+                    if(data===true){
+
+
+                    }
+
+                    else if(data===false){
+
+                        $('#update').hide();
+                        $('.modal-backdrop').remove();
+                        richiediSaldo();
+                        $('#clienteUp').val('');
+                        $('#descrizione').val('');
+                        $('#importo').val('');
+                        $('#modalita').val('');
+                        $('#tipoUp').val('');
+                        $('#id2').val('');
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+
+        }
+
+        if(tipo === 'eliminazione'){
+
+            datiInsert.id = $('#id3').val();
+
+            $.ajax({
+                url: '/salvaSaldoWA/'+datiInsert.id,
+                type: 'DELETE',
+                data: JSON.stringify(datiInsert),
+                cache: false,
+                contentType: 'application/json',
+                success: function(data) {
+
+                    if(data===true){
+
+
+                    }
+
+                    else if(data===false){
+
+                        $('#delete').hide();
+                        $('.modal-backdrop').remove();
+                        richiediSaldo();
+                        $('#id3').val('');
+
+                    }
+
+                },
+                faliure: function(data) {
+
+                }
+            });
+
+        }
+
+    }
+
 </script>
 
 </body>

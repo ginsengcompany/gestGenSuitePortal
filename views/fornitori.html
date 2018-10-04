@@ -81,6 +81,12 @@
                     </a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link" href="/richieste">
+                        <i class="material-icons">add_shopping_cart</i>
+                        <p>Tabella Riassortimento</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" href="/logout?id=user">
                         <i class="material-icons">exit_to_app</i>
                         <p>Logout</p>
@@ -117,13 +123,13 @@
                             <div class="card-header card-header-primary">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="card-title ">Tabella Utenti</h4>
+                                        <h4 class="card-title ">Tabella Fornitori</h4>
                                         <p class="card-category">Gestisci i fornitori per la Mobile Application</p>
                                     </div>
                                     <div class="col-md-6">
                                         <div style="float: right">
                                             <button type="button" id="aggiungiFornitore" onclick="openModalIn()" class="btn btn-primary block" data-toggle="modal" data-target="#insert" data-tooltip="tooltip" data-placement="top" title="Aggiungi Fornitore">Aggiungi <i class="fa fa-plus"></i></button>
-                                            <button type="button" id="modificaFornitore" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Fornitore">Aggiorna <i class="fa fa-pencil"></i></button>
+                                            <button type="button" id="modificaFornitore" onclick="openModalUp()" class="btn btn-primary block" data-toggle="modal" data-target="#update"  data-tooltip="tooltip" data-placement="top" title="Modifica Fornitore">Modifica <i class="fa fa-pencil"></i></button>
                                             <button type="button" id="eliminaFornitore" onclick="openModalDel()" class="btn btn-primary block" data-toggle="modal" data-target="#delete" data-tooltip="tooltip" data-placement="top" title="Elimina Fornitore">Elimina <i class="fa fa-remove"></i></button>
                                         </div>
                                     </div>
@@ -291,8 +297,8 @@
 
     $(document).ready(function () {
 
-        $('#modificaUtente').prop('disabled', true);
-        $('#eliminaUtente').prop('disabled', true);
+        $('#modificaFornitore').prop('disabled', true);
+        $('#eliminaFornitore').prop('disabled', true);
 
         table = $('#table').DataTable({
             ajax: "/getFornitoreWA",
@@ -483,7 +489,7 @@
                         $('#delete').hide();
                         $('.modal-backdrop').remove();
                         table.ajax.reload();
-                        $('#id3').val();
+                        $('#id3').val('');
 
                     }
 

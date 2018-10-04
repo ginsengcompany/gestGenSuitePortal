@@ -72,6 +72,10 @@ module.exports = function (app) {
         res.render('prodotti');
     });
 
+    app.get('/richieste', function (req, res, next) {
+        res.render('richieste');
+    });
+
     app.get('/fornitori', function (req, res, next) {
         res.render('fornitori');
     });
