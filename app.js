@@ -81,6 +81,9 @@ let distinctFornitoriWA = require('./app/routes/webApplication/distinctFornitori
 let distinctCategoriaWA = require('./app/routes/webApplication/distinctCategoriaWA');
 let invioEmailWA = require('./app/routes/webApplication/invioEmailWA');
 let richiesteWA = require('./app/routes/webApplication/richieste');
+let countRichieste = require('./app/routes/webApplication/countRichieste');
+let countProdotti = require('./app/routes/webApplication/countProdotti');
+let countSaldo = require('./app/routes/webApplication/countSaldo');
 
 let categoria = require('./app/routes/mobileApplication/categoria');
 let fornitore = require('./app/routes/mobileApplication/fornitore');
@@ -121,7 +124,9 @@ app.use('/distinctFornitoriWA',distinctFornitoriWA);
 app.use('/distinctCategoriaWA', distinctCategoriaWA);
 app.use('/invioEmailWA', invioEmailWA);
 app.use('/richiesteWA', richiesteWA);
-
+app.use('/countRichieste', countRichieste);
+app.use('/countProdotti', countProdotti);
+app.use('/countSaldo',countSaldo);
 
 app.use('/categoria',categoria);
 app.use('/fornitore',fornitore);

@@ -40,51 +40,63 @@ router.post('/', function(req, res, next) {
         text: 'That was easy!'
     };
 
-
-
     transporter.sendMail(mailOptions, function(error, info){
+        let arrayJson = '';
+
         if (error) {
             console.log(error);
         } else {
 
-            for(let i=0; i <  datiInsert.array.length; i ++ ){
+            async function loop() {
+                for(let i=0; i <  datiInsert.array.length; i ++ ){
 
+                    await delay();
 
-                let queryPostRichiesta = "INSERT INTO tb_richieste" +
-                    "(struttura, fornitore, codice, descrizione_prodotto, data, quantita, user_admin)" +
-                    "VALUES (" +
-                    "'" + struttura +"', " +
-                    "'" + fornitore  +"', " +
-                    "'" + datiInsert.array[i].codice      +"', " +
-                    "'" + datiInsert.array[i].descrizione     +"', " +
-                    "'" + moment().format('MMMM Do YYYY, h:mm:ss a')  +"', " +
-                    "'" + datiInsert.array[i].quantita      +"', " +
-                    "'" + user_admin   +"')";
+                    let queryPostRichiesta = "INSERT INTO tb_richieste" +
+                        "(struttura, fornitore, codice, descrizione_prodotto, data, quantita, user_admin)" +
+                        "VALUES (" +
+                        "'" + struttura +"', " +
+                        "'" + fornitore  +"', " +
+                        "'" + datiInsert.array[i].codice      +"', " +
+                        "'" + datiInsert.array[i].descrizione     +"', " +
+                        "'" + moment().format()  +"', " +
+                        "'" + datiInsert.array[i].quantita      +"', " +
+                        "'" + user_admin   +"')";
 
-                const query = client.query(queryPostRichiesta);
+                    const query = client.query(queryPostRichiesta);
 
-                query.on("row", function (row, result) {
-                    result.addRow(row);
-                });
+                    query.on("row", function (row, result) {
+                        result.addRow(row);
+                    });
 
-                query.on('error', function() {
-                    return res.json(false);
-                });
+                    query.on('error', function() {
+                        arrayJson = false;
+                    });
 
-                query.on("end", function (result) {
-                    let myOjb = JSON.stringify(result.rows, null, "    ");
-                    let final = JSON.parse(myOjb);
-                    client.end();
-                    return res.json(true);
-                });
+                    query.on("end", function (result) {
+                        let myOjb = JSON.stringify(result.rows, null, "    ");
+                        let final = JSON.parse(myOjb);
+                        arrayJson = true;
+                    });
 
+                }
             }
 
+            loop().then(_ => client.end());
+
         }
+
+        return res.json(arrayJson);
+
     });
 
-
 });
+
+function delay() {
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, 100);
+    });
+}
 
 
 

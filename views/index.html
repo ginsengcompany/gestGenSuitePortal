@@ -115,7 +115,73 @@
         <!-- End Navbar -->
         <div class="content">
             <div class="container-fluid">
-                <!-- your content here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Dettegli Generali</h4>
+                                <p class="card-category">GestGenSuite MobileApp/WebApplication</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <label class="bmd-label-floating"
+                                                       style="color:black">Statistiche:</label>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <label class="bmd-label-floating" for="myChart1"
+                                                                       style="color:black">1</label>
+                                                                <br>
+                                                                <canvas id="myChart1" width="400" height="400"></canvas>
+                                                            </div>
+                                                        </div>
+
+                                                        <!--<div class="card">
+                                                            <div class="card-body">
+                                                                <label class="bmd-label-floating" for="myChart3"
+                                                                       style="color:black">3</label>
+                                                                <br>
+                                                                <canvas id="myChart3" width="400" height="400"></canvas>
+                                                            </div>
+                                                        </div>-->
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <label class="bmd-label-floating" for="myChart2" style="color:black">Statistica Richeste per Fornitore</label>
+                                                                <br>
+                                                                <canvas id="myChart2" width="400" height="400"></canvas>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4">
+
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <label class="bmd-label-floating" for="myChart4" style="color:black">Statistica Prodotti per Categoria</label>
+                                                                <br>
+                                                                <canvas id="myChart4" width="400" height="400"></canvas>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -144,6 +210,316 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+<script src="js/it.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+
+<script>
+    moment.locale('it');
+    let ctx1 = $("#myChart1");
+    let ctx2 = $("#myChart2");
+    let ctx3 = $("#myChart3");
+    let ctx4 = $("#myChart4");
+
+    //CHART 1
+    let listaSaldo = "";
+    let newArrayLabelData= [];
+    let newArrayDataIncasso = [];
+    let newArrayDataPagamento = [];
+
+    //CHART 2
+    let listaFornitori = "";
+    let newArrayLabel = [];
+    let newArrayData = [];
+
+    //CHART 4
+    let listaProdotti = "";
+    let newArrayLabelProdotti = [];
+    let newArrayDataProdotti = [];
+
+    let myLineChart1 = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: "Incasso",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(23, 167, 0, 0.4)",
+                borderColor: "green", // The main line color
+                borderCapStyle: 'square',
+                borderDash: [], // try [5, 15] for instance
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "black",
+                pointBackgroundColor: "white",
+                pointBorderWidth: 1,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: "white",
+                pointHoverBorderColor: "green",
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 10,
+                // notice the gap in the data and the spanGaps: true
+                data: newArrayDataIncasso,
+                spanGaps: true,
+            }, {
+                label: "Pagamento",
+                fill: true,
+                lineTension: 0.1,
+                backgroundColor: "rgba(225,0,0,0.4)",
+                borderColor: "red",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "white",
+                pointBackgroundColor: "black",
+                pointBorderWidth: 1,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: "white",
+                pointHoverBorderColor: "red",
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 10,
+                // notice the gap in the data and the spanGaps: false
+                data: newArrayDataPagamento,
+                spanGaps: false,
+            }
+
+            ]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: "time",
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'value'
+                    }
+                }]
+            }
+        }
+    });
+
+    let myLineChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: newArrayLabel,
+            datasets: [{
+                label: 'Numero richieste',
+                data: newArrayData,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+    /*let myLineChart3 = new Chart(ctx3, {
+        type: 'radar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });*/
+
+    let myLineChart4 = new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: newArrayLabelProdotti,
+            datasets: [{
+                label: 'Numero prodotti',
+                data: newArrayDataProdotti,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+    //CHART 1
+    $.ajax({
+        url: '/countSaldo',
+        type: 'GET',
+        cache: false,
+        contentType: 'application/json',
+        success: function (data) {
+            listaSaldo = data.data;
+
+            for(let i=0; i<listaSaldo.length; i++){
+
+                if(listaSaldo[i].tipo==="incasso"){
+                    let a = {t:"", y:""};
+                    a.t = new Date(listaSaldo[i].data);
+                    a.y = listaSaldo[i].importo;
+
+                    newArrayDataIncasso.push(a);
+                }
+
+                if(listaSaldo[i].tipo==="pagamento"){
+                    let b = {t:"", y:""};
+                    b.t = new Date(listaSaldo[i].data);
+                    b.y = listaSaldo[i].importo;
+
+                    newArrayDataPagamento.push(b);
+                }
+
+
+            }
+
+            console.log(newArrayDataIncasso);
+            console.log(newArrayDataPagamento);
+            //console.log(newArrayDataPagamento);
+
+            myLineChart1.update();
+
+
+
+        },
+        faliure: function (data) {
+
+        }
+    });
+
+    //CHART 2
+    $.ajax({
+        url: '/countRichieste',
+        type: 'GET',
+        cache: false,
+        contentType: 'application/json',
+        success: function (data) {
+            listaFornitori = data.data;
+
+            for(let i=0; i<listaFornitori.length; i++){
+
+                newArrayLabel.push(listaFornitori[i].nome_descrizione);
+                newArrayData.push(listaFornitori[i].count);
+
+            }
+
+            myLineChart2.update();
+
+
+
+        },
+        faliure: function (data) {
+
+        }
+    });
+
+    //CHART 4
+    $.ajax({
+        url: '/countProdotti',
+        type: 'GET',
+        cache: false,
+        contentType: 'application/json',
+        success: function (data) {
+            listaProdotti = data.data;
+
+            for(let i=0; i<listaProdotti.length; i++){
+
+                newArrayLabelProdotti.push(listaProdotti[i].text);
+                newArrayDataProdotti.push(listaProdotti[i].count);
+
+            }
+
+            myLineChart4.update();
+
+
+
+        },
+        faliure: function (data) {
+
+        }
+    });
+</script>
 </body>
 
 </html>

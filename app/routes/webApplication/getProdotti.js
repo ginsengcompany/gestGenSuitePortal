@@ -8,12 +8,16 @@ let connectionPostgres = function () {
 };
 
 
-router.post('/', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 
     let user = req.session.user;
 
-    let datiSaldo = req.body;
-    let tipo = datiSaldo.tipo;
+    let id = req.params.id;
+
+    let myObj = JSON.stringify(id);
+    let final = JSON.parse(JSON.parse(myObj));
+
+    let tipo = final.tipo;
     let struttura = user.struttura;
 
 
@@ -23,27 +27,27 @@ router.post('/', function (req, res, next) {
     let client = connectionPostgres();
 
     if (tipo === 'multipla') {
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' order by tb_fornitori.id";
+        queryProdotti = "SELECT tb_prodotti.id as id_prodotto, * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' order by tb_fornitori.id";
     }
     else if (tipo === 'categoria') {
 
-        let categoria = datiSaldo.categoria;
+        let categoria = final.categoria;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND categoria='"+categoria+"' order by tb_fornitori.id";
+        queryProdotti = "SELECT tb_prodotti.id as id_prodotto, * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND categoria='"+categoria+"' order by tb_fornitori.id";
     }
     else if (tipo === 'fornitore'){
 
-        let fornitore = datiSaldo.fornitore;
+        let fornitore = final.fornitore;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' order by tb_fornitori.id";
+        queryProdotti = "SELECT tb_prodotti.id as id_prodotto, * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' order by tb_fornitori.id";
 
     }
     else if (tipo === 'double'){
 
-        let fornitore = datiSaldo.fornitore;
-        let categoria = datiSaldo.categoria;
+        let fornitore = final.fornitore;
+        let categoria = final.categoria;
 
-        queryProdotti = "SELECT * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' AND categoria='"+categoria+"' order by tb_fornitori.id";
+        queryProdotti = "SELECT tb_prodotti.id as id_prodotto, * FROM tb_prodotti INNER JOIN tb_fornitori ON tb_prodotti.fornitore = tb_fornitori.id WHERE tb_prodotti.struttura='" + struttura + "' AND fornitore='"+fornitore+"' AND categoria='"+categoria+"' order by tb_fornitori.id";
 
     }
 
@@ -63,16 +67,7 @@ router.post('/', function (req, res, next) {
         let jsonFinale = {
             "data": final
         };
-
-        if (jsonFinale.data.length > 0) {
-
-            client.end();
-            return res.json({errore: false, id: jsonFinale.data});
-
-
-        }else{
-            return res.json({errore:true});
-        }
+        return res.json(jsonFinale);
     });
 
 
@@ -103,6 +98,73 @@ router.post('/:id', function(req, res, next) {
 
 
     const query = client.query(queryPostSaldo);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on('error', function() {
+        return res.json(true);
+    });
+
+    query.on("end", function (result) {
+        let myOjb = JSON.stringify(result.rows, null, "    ");
+        let final = JSON.parse(myOjb);
+        client.end();
+        return res.json(false);
+    });
+
+
+});
+
+router.put('/:id', function(req, res, next) {
+
+    let id = req.params.id;
+
+    let client = connectionPostgres();
+
+    let datiUpdate = req.body;
+
+    let queryAutenticazione = "UPDATE tb_prodotti SET " +
+        "codice='"+datiUpdate.codice + "', " +
+        "descrizione='"+datiUpdate.descrizione+"', " +
+        "categoria='"+datiUpdate.categoria+"', " +
+        "fornitore='"+datiUpdate.fornitore+"' " +
+        " WHERE id='" + id + "'";
+
+    const query = client.query(queryAutenticazione);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on('error', function() {
+        return res.json(true);
+    });
+
+    query.on("end", function (result) {
+        let myOjb = JSON.stringify(result.rows, null, "    ");
+        let final = JSON.parse(myOjb);
+        client.end();
+        return res.json(false);
+    });
+
+});
+
+router.delete('/:id', function(req, res, next) {
+
+    let id = req.params.id;
+
+    let client = connectionPostgres();
+
+    let datiUpdate = req.body;
+
+    let queryAutenticazione = "DELETE FROM " +
+        "tb_prodotti " +
+        "WHERE " +
+        "id='" + id + "'";
+
+    const query = client.query(queryAutenticazione);
 
     query.on("row", function (row, result) {
         result.addRow(row);
