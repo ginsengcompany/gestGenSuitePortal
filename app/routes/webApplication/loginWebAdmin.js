@@ -10,7 +10,7 @@ let connectionPostgres = function () {
 router.post('/', function(req, res, next) {
 
     let datiRegistrazione = req.body;
-    let username = datiRegistrazione.username;
+    let username = datiRegistrazione.username.toLowerCase();
     let password = datiRegistrazione.password;
 
     let queryAutenticazione = '';

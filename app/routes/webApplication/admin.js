@@ -60,7 +60,7 @@ router.put('/', function(req, res, next) {
 
     let datiUpdate = req.body;
 
-    let queryAutenticazione = "UPDATE tb_auth SET username='"+datiUpdate.username+"', password='"+datiUpdate.password+"', nome='"+datiUpdate.nome+"', cognome='"+datiUpdate.cognome+"' WHERE id='"+user.id+"'";
+    let queryAutenticazione = "UPDATE tb_auth SET username='"+datiUpdate.username.toLowerCase()+"', password='"+datiUpdate.password+"', nome='"+datiUpdate.nome+"', cognome='"+datiUpdate.cognome+"' WHERE id='"+user.id+"'";
 
 
     const query = client.query(queryAutenticazione);
@@ -94,7 +94,7 @@ router.post('/', function(req, res, next) {
     let queryPostSaldo = " INSERT INTO tb_auth" +
         "(username, password, nome, cognome, create_date, create_user, tipo, struttura)" +
         "VALUES (" +
-        "'" + datiInsert.username +"', " +
+        "'" + datiInsert.username.toLowerCase() +"', " +
         "'" + datiInsert.password     +"', " +
         "'" + datiInsert.nome +"', " +
         "'" + datiInsert.cognome     +"', " +
