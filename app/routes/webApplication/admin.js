@@ -100,7 +100,7 @@ router.post('/', function(req, res, next) {
         "'" + datiInsert.cognome     +"', " +
         "'" + moment().format() +"', " +
         "'" + user.username +"', " +
-        "FALSE, " +
+        "'" + user.tipo +"', " +
         "'" + user.struttura   +"')";
 
 
@@ -132,7 +132,7 @@ router.put('/:id', function(req, res, next) {
 
     let datiUpdate = req.body;
 
-    let queryAutenticazione = "UPDATE tb_auth SET username='"+datiUpdate.username+"', password='"+datiUpdate.password+"', nome='"+datiUpdate.nome+"', cognome='"+datiUpdate.cognome+"' WHERE id='"+id+"'";
+    let queryAutenticazione = "UPDATE tb_auth SET username='"+datiUpdate.username+"', password='"+datiUpdate.password+"', nome='"+datiUpdate.nome+"', cognome='"+datiUpdate.cognome+"' , tipo='"+datiUpdate.tipo+"' WHERE id='"+id+"'";
 
 
     const query = client.query(queryAutenticazione);

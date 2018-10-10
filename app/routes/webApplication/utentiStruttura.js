@@ -13,8 +13,7 @@ router.get('/', function(req, res, next) {
 
     let client = connectionPostgres();
 
-    let queryAutenticazione = "SELECT * FROM tb_auth WHERE struttura='"+user.struttura+"' " +
-                                "AND tipo = FALSE";
+    let queryAutenticazione = "SELECT * FROM tb_auth WHERE struttura='"+user.struttura+"' ";
 
 
     const query = client.query(queryAutenticazione);

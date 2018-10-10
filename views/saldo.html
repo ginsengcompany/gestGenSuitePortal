@@ -205,6 +205,24 @@
                                                 </div>
                                             </div>
 
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label class="bmd-label-floating" for="entsos"  style="color:green">Entrate in Sospeso:</label>
+                                                    <br>
+                                                    <h3 class="bmd-label-floating" id='entsos'></h3>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <label class="bmd-label-floating" for="uscsos"  style="color:red">Uscite in Sospeso:</label>
+                                                    <br>
+                                                    <h3 class="bmd-label-floating" id='uscsos'></h3>
+
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <div class="col-md-9">
@@ -213,6 +231,7 @@
                                                     <thead>
                                                     <th>Cliente</th>
                                                     <th>Descrizione</th>
+                                                    <th>Data</th>
                                                     <th>Importo</th>
                                                     <th>Modalita</th>
                                                     <th>Tipo</th>
@@ -510,6 +529,8 @@
                     $('#entrate').val(0);
                     $('#uscite').val(0);
                     $('#saldo').val(0);
+                    $('#entsos').val(0);
+                    $('#uscsos').val(0);
                     alert('Nessun elemento presente nel saldo che rispetti i vincoli selezionati!')
                     if (!table.data().any() ) {
                         //alert( 'Empty table' );
@@ -519,17 +540,28 @@
                     }
                 } else {
                     let entrata = parseFloat('0.00');
-                    let uscita = parseFloat('0.00')
+                    let uscita = parseFloat('0.00');
+                    let entsos = parseFloat('0.00');
+                    let uscsos = parseFloat('0.00');
                     for (var i = 0; i < data.data.length; i++) {
-                        if(data.data[i].tipo === 'incasso'){
+                        if(data.data[i].tipo === 'incasso' && data.data[i].modalita!=='sospeso'){
                             entrata = parseFloat(entrata) + parseFloat(data.data[i].importo);
-                        }else if (data.data[i].tipo === 'pagamento'){
+                        }
+                        if (data.data[i].tipo === 'pagamento' && data.data[i].modalita!=='sospeso'){
                             uscita = parseFloat(uscita) + parseFloat(data.data[i].importo);
+                        }
+                        if (data.data[i].tipo === 'pagamento' && data.data[i].modalita==='sospeso'){
+                            uscsos = parseFloat(uscsos) + parseFloat(data.data[i].importo);
+                        }
+                        if (data.data[i].tipo === 'pagamento' && data.data[i].modalita==='sospeso'){
+                            entsos = parseFloat(entsos) + parseFloat(data.data[i].importo);
                         }
                     }
                     $('#entrate').text(entrata);
                     $('#uscite').text(uscita);
                     $('#saldo').text(entrata - uscita);
+                    $('#entsos').val(entsos);
+                    $('#uscsos').val(uscsos);
 
                     let totale = entrata - uscita;
 
@@ -608,6 +640,11 @@
                 columns: [
                     {"data": "cliente"},
                     {"data": "descrizione"},
+                    {"data": "data","render": function (data) {
+                        function pad(s) { return (s < 10) ? '0' + s : s; };
+                        let d = new Date(data);
+                        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+                    }},
                     {"data": "importo"},
                     {"data": "modalita"},
                     {"data": "tipo"},

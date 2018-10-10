@@ -144,6 +144,7 @@
                                         <th>Cognome</th>
                                         <th>Data creazione</th>
                                         <th>Creato da</th>
+                                        <th>Tipo</th>
                                         </thead>
                                     </table>
                                 </div>
@@ -186,6 +187,20 @@
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Cognome</label>
                                             <input id="cognome1" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="tipo1">tipo</label>
+                                            </div>
+                                            <select class="custom-select" id="tipo1">
+                                                <option selected disabled="">Seleziona...</option>
+                                                <option value="false">User</option>
+                                                <option value="true">Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -233,6 +248,20 @@
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Cognome</label>
                                             <input id="cognome2" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="tipo2">tipo</label>
+                                            </div>
+                                            <select class="custom-select" id="tipo2">
+                                                <option disabled="">Seleziona...</option>
+                                                <option value="false">User</option>
+                                                <option value="true">Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +359,19 @@
                     let d = new Date(data);
                     return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
                 }},
-                {"data": "create_user"}
+                {"data": "create_user"},
+                {"data": "tipo", "render": function(data) {
+
+                    if(data === false){
+
+                        return '<img class="img" src="../assets/img/faces/avatar.png" style="height: 30px" /> User'
+
+                    }
+                    else if(data === true){
+
+                        return '<img class="img" src="../assets/img/faces/avatar.png" style="height: 30px"/> Admin'
+                    }
+                }}
             ],
             responsive: {
                 details: {
@@ -389,11 +430,19 @@
         });
         arrayUtenti = ids1;
 
+        if(arrayUtenti[0].tipo === true){
+            $('#tipo2').val('true');
+        }
+        else if(arrayUtenti[0].tipo === false){
+            $('#tipo2').val('false');
+        }
+
         $('#username2').val(arrayUtenti[0].username);
         $('#password2').val(arrayUtenti[0].password);
         $('#nome2').val(arrayUtenti[0].nome);
         $('#cognome2').val(arrayUtenti[0].cognome);
         $('#id2').val(arrayUtenti[0].id);
+
 
     }
 
@@ -415,7 +464,8 @@
             "password": "",
             "nome": "",
             "cognome": "",
-            "id": ""
+            "id": "",
+            "tipo": ""
         };
 
         if(tipo === 'inserimento'){
@@ -424,6 +474,7 @@
             datiInsert.password = $('#password1').val();
             datiInsert.nome = $('#nome1').val();
             datiInsert.cognome = $('#cognome1').val();
+            datiInsert.tipo = $('#tipo1').val();
 
             $.ajax({
                 url: '/getAdmin',
@@ -442,6 +493,7 @@
                         $('#password1').val('');
                         $('#nome1').val('');
                         $('#cognome1').val('');
+                        $('#tipo1').val('');
 
                     }
                     else if(data===true){
@@ -485,6 +537,7 @@
             datiInsert.nome = $('#nome2').val();
             datiInsert.cognome = $('#cognome2').val();
             datiInsert.id = $('#id2').val();
+            datiInsert.tipo = $('#tipo2').val();
 
             $.ajax({
                 url: '/getAdmin/'+datiInsert.id,
@@ -528,6 +581,7 @@
                         $('#nome2').val('');
                         $('#cognome2').val('');
                         $('#id2').val('');
+                        $('#tipo2').val('');
 
                     }
 
