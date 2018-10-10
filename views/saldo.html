@@ -553,15 +553,15 @@
                         if (data.data[i].tipo === 'pagamento' && data.data[i].modalita==='sospeso'){
                             uscsos = parseFloat(uscsos) + parseFloat(data.data[i].importo);
                         }
-                        if (data.data[i].tipo === 'pagamento' && data.data[i].modalita==='sospeso'){
+                        if (data.data[i].tipo === 'incasso' && data.data[i].modalita==='sospeso'){
                             entsos = parseFloat(entsos) + parseFloat(data.data[i].importo);
                         }
                     }
-                    $('#entrate').text(entrata);
-                    $('#uscite').text(uscita);
-                    $('#saldo').text(entrata - uscita);
-                    $('#entsos').val(entsos);
-                    $('#uscsos').val(uscsos);
+                    $('#entrate').text("€ "+entrata);
+                    $('#uscite').text("€ "+uscita);
+                    $('#saldo').text("€ "+(entrata - uscita));
+                    $('#entsos').text("€ "+entsos);
+                    $('#uscsos').text("€ "+uscsos);
 
                     let totale = entrata - uscita;
 
