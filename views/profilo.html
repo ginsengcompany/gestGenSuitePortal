@@ -2,17 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         GestGenSuite
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet"/>
 </head>
 
 <body class="">
@@ -25,8 +27,8 @@
       -->
         <div class="logo">
             <a class="simple-text logo-normal">
-            GestGenSuite <img src="images/logo.png" height="100px" >
-        </a>
+                GestGenSuite <img src="images/logo.png" height="100px">
+            </a>
 
         </div>
         <div class="sidebar-wrapper">
@@ -101,7 +103,8 @@
                 <div class="navbar-wrapper">
                     <a class="navbar-brand" href="/profilo">Profilo</a>
                 </div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="navbar-toggler-icon icon-bar"></span>
                     <span class="navbar-toggler-icon icon-bar"></span>
@@ -170,7 +173,7 @@
                         <div class="card card-profile">
                             <div class="card-avatar">
                                 <a href="#pablo">
-                                    <img class="img" src="../assets/img/faces/avatar.png" />
+                                    <img class="img" src="../assets/img/faces/avatar.png"/>
                                 </a>
                             </div>
                             <div class="card-body">
@@ -212,15 +215,15 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Aggiungi Logo</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inp">
-                                                <label  class="custom-file-upload" for="inp">Scegli File</label>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Aggiungi Logo</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="inp">
+                                                    <label class="custom-file-upload" for="inp">Scegli File</label>
+                                                </div>
                                             </div>
                                         </div>
-										</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
@@ -230,6 +233,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br>
                                     <button type="submit" class="btn btn-primary pull-right">Modifica Struttura</button>
                                     <div class="clearfix"></div>
                                 </form>
@@ -240,12 +244,49 @@
                         <div class="card card-profile">
                             <div class="card-avatar">
                                 <a href="#pablo">
-                                    <img class="img" src="../assets/img/faces/build.png" />
+                                    <img class="img" src="../assets/img/faces/build.png"/>
                                 </a>
                             </div>
                             <div class="card-body">
                                 <h6 class="card-category text-gray">Struttura Assegnata</h6>
                                 <h4 id="titoloStruttura" class="card-title"></h4>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                                <a href="#pablo">
+                                    <img class="img" src="../assets/img/faces/gmail.png"/>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-category text-gray">Credenziali Per Gestore Invio E-mail</h6>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1" class="bmd-label-floating">Indirizzo
+                                                Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1">
+                                            <span class="bmd-help">Non condivideremo mai la tua email con nessun altro.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group form-group">
+                                            <label for="exampleInputPassword1"
+                                                   class="bmd-label-floating">Password</label>
+                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <div class="input-group-append">
+                                                <button class="navbar-toggler hidden-lg-up" onclick="togglePwd(this)" type="button">
+                                                    <span class="sr-only">Toggle drawer</span>
+                                                    <i class="material-icons" id="idToggle">visibility</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary pull-right">Salva</button>
                             </div>
                         </div>
                     </div>
@@ -272,7 +313,8 @@
                     &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>, powered by
+                    </script>
+                    , powered by
                     <a href="http://www.ak12srl.it" target="_blank">Ak-12 S.r.l.</a>
                 </div>
                 <!-- your footer here -->
@@ -295,20 +337,39 @@
 
 <script>
 
-    $( document ).ready(function() {
+    function togglePwd(a){
+
+        if(a.children[1].textContent === 'visibility'){
+
+            $('#idToggle').text('visibility_off');
+
+            $('#exampleInputPassword1').prop("type", "text");
+
+        }
+        else if(a.children[1].textContent === 'visibility_off'){
+
+            $('#idToggle').text('visibility');
+
+            $('#exampleInputPassword1').prop("type", "password");
+
+        }
+
+    }
+
+    $(document).ready(function () {
 
         function readFile() {
 
             if (this.files && this.files[0]) {
 
-                var FR= new FileReader();
+                var FR = new FileReader();
 
-                FR.addEventListener("load", function(e) {
-                    document.getElementById("img").src       = e.target.result;
+                FR.addEventListener("load", function (e) {
+                    document.getElementById("img").src = e.target.result;
                     document.getElementById("b64").innerHTML = e.target.result;
                 });
 
-                FR.readAsDataURL( this.files[0] );
+                FR.readAsDataURL(this.files[0]);
             }
 
         }
@@ -320,9 +381,9 @@
             type: 'GET',
             cache: false,
             contentType: 'application/json',
-            success: function(data) {
+            success: function (data) {
 
-                if(data.errore===false){
+                if (data.errore === false) {
 
                     $('#username').val(data.user.username);
                     $('#password').val(data.user.password);
@@ -336,42 +397,38 @@
                         type: 'GET',
                         cache: false,
                         contentType: 'application/json',
-                        success: function(data) {
+                        success: function (data) {
 
-                            if(data.errore===false){
+                            if (data.errore === false) {
 
                                 $('#struttura').val(data.struttura.nome);
                                 $('#nomeStruttura').val(data.struttura.nome);
                                 $('#indirizzo').val(data.struttura.indirizzo);
                                 $('#recapito').val(data.struttura.recapito);
                                 $('#titoloStruttura').text(data.struttura.nome);
-                                $('#img').attr("src",data.struttura.img);
-
-
+                                $('#img').attr("src", data.struttura.img);
 
 
                             }
-                            else if(data.errore===true){
-
+                            else if (data.errore === true) {
 
 
                             }
 
                         },
-                        faliure: function(data) {
+                        faliure: function (data) {
 
                         }
                     });
 
                 }
-                else if(data.errore===true){
-
+                else if (data.errore === true) {
 
 
                 }
 
             },
-            faliure: function(data) {
+            faliure: function (data) {
 
             }
         });
@@ -379,7 +436,7 @@
     });
 
 
-    $('#utenteForm').on("submit", function(){
+    $('#utenteForm').on("submit", function () {
 
         let datiAdmin = {
             "username": $('#username').val(),
@@ -394,9 +451,9 @@
             data: JSON.stringify(datiAdmin),
             cache: false,
             contentType: 'application/json',
-            success: function(data) {
+            success: function (data) {
 
-                if(data===true){
+                if (data === true) {
 
                     $("#myModal1").on("show", function () {
                         $("#myModal1 a.btn").on("click", function (e) {
@@ -420,7 +477,7 @@
 
                 }
 
-                else if(data===false){
+                else if (data === false) {
 
 
                     window.location.reload();
@@ -429,7 +486,7 @@
                 }
 
             },
-            faliure: function(data) {
+            faliure: function (data) {
 
             }
         });
@@ -438,11 +495,11 @@
         return false;
     });
 
-    $('#strutturaForm').on("submit", function(){
+    $('#strutturaForm').on("submit", function () {
 
         let datiStruttura = {
             "nomeStruttura": $('#nomeStruttura').val(),
-            "indirizzo": $('#indirizzo').val() ,
+            "indirizzo": $('#indirizzo').val(),
             "recapito": $('#recapito').val(),
             "text": $('#img').attr("src")
         };
@@ -453,9 +510,9 @@
             data: JSON.stringify(datiStruttura),
             cache: false,
             contentType: 'application/json',
-            success: function(data) {
+            success: function (data) {
 
-                if(data===true){
+                if (data === true) {
 
                     $("#myModal1").on("show", function () {
                         $("#myModal1 a.btn").on("click", function (e) {
@@ -479,14 +536,14 @@
 
                 }
 
-                else if(data===false){
+                else if (data === false) {
 
                     window.location.reload();
 
                 }
 
             },
-            faliure: function(data) {
+            faliure: function (data) {
 
             }
         });
